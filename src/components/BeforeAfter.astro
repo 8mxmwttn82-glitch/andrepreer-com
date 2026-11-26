@@ -1,0 +1,24 @@
+---
+import ConceptSlot from "./ConceptSlot.astro";
+
+interface Props {
+  beforeId: string;
+  afterId: string;
+  caption: string;
+  beforeAlt: string;
+  afterAlt: string;
+}
+
+const { beforeId, afterId, caption, beforeAlt, afterAlt } = Astro.props;
+---
+
+<figure class="ba">
+  <div class="ba-pair">
+    <ConceptSlot id={beforeId} alt={beforeAlt} label={caption} kicker="Before" bare={true} />
+    <ConceptSlot id={afterId} alt={afterAlt} label={caption} kicker="After" bare={true} />
+  </div>
+  <figcaption>
+    <span class="tag">{caption}</span>
+    Not a finished Andre Preer job, and not a customer’s address.
+  </figcaption>
+</figure>

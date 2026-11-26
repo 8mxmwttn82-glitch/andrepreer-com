@@ -71,12 +71,15 @@ export interface Service {
   benefits: string[];
   projects: string[];
   image: string | null;
+  concept?: string;
+  group: "kitchen" | "exterior" | "property";
   related: string[];
 }
 
 export const services: Service[] = [
   {
     slug: "landscape-design-installation",
+    group: "exterior",
     name: "Landscape design & installation",
     title: "Landscape Design & Installation in Springfield, IL | Andre Preer",
     description:
@@ -97,11 +100,13 @@ export const services: Service[] = [
       "A backyard sorted into lawn, planting, and a place to sit",
       "A property plan that also includes walls, a patio, or a fire feature when those belong in the same picture",
     ],
-    image: "front-entry-planting",
+    image: null,
+    concept: "landscaped-bed",
     related: ["trees-shrubs-roses", "patios-hardscaping-outdoor-living"],
   },
   {
     slug: "trees-shrubs-roses",
+    group: "exterior",
     name: "Trees, shrubs, roses & planting",
     title: "Trees, Shrubs & Rose Planting in Springfield, IL | Andre Preer",
     description:
@@ -127,6 +132,7 @@ export const services: Service[] = [
   },
   {
     slug: "limestone-walls-stonework",
+    group: "exterior",
     name: "Limestone walls & stonework",
     title: "Limestone Walls & Stonework in Springfield, IL | Andre Preer",
     description:
@@ -147,11 +153,13 @@ export const services: Service[] = [
       "Stone edging that gives a bed a finished line against lawn or gravel",
       "Walls that form the side of a patio, a fire area, or a change in grade you walk through",
     ],
-    image: "stone-home-and-lawn",
+    image: null,
+    concept: "stone-patio",
     related: ["patios-hardscaping-outdoor-living", "specialty-stone-water"],
   },
   {
     slug: "patios-hardscaping-outdoor-living",
+    group: "exterior",
     name: "Patios, hardscaping & outdoor living",
     title: "Patios & Outdoor Living in Springfield, IL | Andre Preer",
     description:
@@ -172,11 +180,13 @@ export const services: Service[] = [
       "Walks that connect the drive, the entry, and the back without a leftover strip of mud",
       "An outdoor sitting area planned together with walls, planting, or a fire feature",
     ],
-    image: "stone-home-plantings",
+    image: null,
+    concept: "outdoor-fire",
     related: ["fire-features", "landscape-design-installation"],
   },
   {
     slug: "fire-features",
+    group: "exterior",
     name: "Fire features & gathering spaces",
     title: "Fire Pits & Fire Decks in Springfield, IL | Andre Preer",
     description:
@@ -198,10 +208,12 @@ export const services: Service[] = [
       "An evening spot tied back to the door, the grade, and the rest of the landscape",
     ],
     image: null,
+    concept: "outdoor-fire",
     related: ["patios-hardscaping-outdoor-living", "limestone-walls-stonework"],
   },
   {
     slug: "specialty-stone-water",
+    group: "exterior",
     name: "Specialty stone & water features",
     title: "Specialty Stone & Water Features in Springfield, IL | Andre Preer",
     description:
@@ -227,6 +239,7 @@ export const services: Service[] = [
   },
   {
     slug: "interior-exterior",
+    group: "property",
     name: "Interior–exterior design",
     title: "Interior & Exterior Design in Springfield, IL | Andre Preer",
     description:
@@ -248,7 +261,169 @@ export const services: Service[] = [
       "An indoor-outdoor stone detail, such as a pebble walk, tied to the exterior work",
     ],
     image: "interior-living-room",
-    related: ["landscape-design-installation", "specialty-stone-water"],
+    related: ["full-kitchen-remodels", "landscape-design-installation"],
+  },
+  {
+    slug: "full-kitchen-remodels",
+    group: "kitchen",
+    name: "Full kitchen remodels",
+    title: "Full Kitchen Remodels in Springfield, IL | Andre Preer",
+    description:
+      "Full kitchen remodels in Springfield and Central Illinois: layout, cabinets, countertops, backsplash, and finishing, planned as one scope.",
+    summary: "The kitchen planned and built as one job, not a string of leftover updates.",
+    h1: "Full kitchen remodels",
+    problem:
+      "A lot of kitchens are a pile of separate updates: cabinets from one year, a counter from another, and a backsplash that meets neither. The room still does not work for how you cook.",
+    solution:
+      "A full remodel sets the layout, cabinets, countertops, backsplash, and finishing in one scope. Andre walks the kitchen with you, then the work follows that plan.",
+    benefits: [
+      "The pieces that touch each other are decided together, so the counter, the tile, and the cabinets meet on purpose.",
+      "You start with Andre, and the scope you agree to is the scope that gets built.",
+      "The same practice can also take the yard and the stone outside, when the property needs both.",
+    ],
+    projects: [
+      "A kitchen taken back to the layout and rebuilt as one room",
+      "A remodel that keeps the footprint and replaces the working surfaces",
+      "A kitchen planned in the same conversation as a door, a patio, or the view outside",
+    ],
+    image: null,
+    concept: "kitchen-after",
+    related: ["backsplash-installation", "cabinets", "countertops"],
+  },
+  {
+    slug: "backsplash-installation",
+    group: "kitchen",
+    name: "Backsplash installation",
+    title: "Kitchen Backsplash Installation in Springfield, IL | Andre Preer",
+    description:
+      "Kitchen backsplash installation in Springfield and Central Illinois, planned with the counter, the cabinets, and the light in the room.",
+    summary: "The surface between the counter and the upper cabinets, set so the kitchen looks finished.",
+    h1: "Backsplash installation",
+    problem:
+      "A backsplash added after everything else often stops short of the cabinet, fights the counter edge, or leaves outlets sitting in the wrong place. It is the part people notice first.",
+    solution:
+      "Andre installs the backsplash as part of the kitchen, not as a strip of tile at the end. The field, the edges, and how it meets the counter and the cabinets are decided before it goes up.",
+    benefits: [
+      "The backsplash is lined up with the counter and the cabinets instead of hiding a gap.",
+      "It can be the whole project, or one part of a remodel that also includes cabinets and counters.",
+      "You can see the idea as a design concept on this site. Finished jobs are something to look at in person.",
+    ],
+    projects: [
+      "A full-height backsplash on a working wall",
+      "A shorter run behind a range or a sink, finished at a clean edge",
+      "Tile or stone chosen to sit with a counter that is staying, or one that is being replaced",
+    ],
+    image: null,
+    concept: "herringbone",
+    related: ["countertops", "full-kitchen-remodels", "lighting-finishing"],
+  },
+  {
+    slug: "cabinets",
+    group: "kitchen",
+    name: "Cabinets, new and refacing",
+    title: "Kitchen Cabinets & Refacing in Springfield, IL | Andre Preer",
+    description:
+      "New kitchen cabinets and cabinet refacing in Springfield and Central Illinois, planned with the counters and the backsplash.",
+    summary: "New cabinets when the boxes need to change, or refacing when the layout can stay.",
+    h1: "Cabinets, new and refacing",
+    problem:
+      "Replacing every cabinet is the wrong job when the layout still works. Refacing is the wrong job when the boxes are tired or the doors no longer fit how you use the room.",
+    solution:
+      "Andre looks at the boxes you have. New cabinets when the layout or the carcasses need to change. Refacing when the layout can stay and the doors, drawers, and finish are what is dated.",
+    benefits: [
+      "The choice between new and refacing is made from the kitchen you have, not from a default package.",
+      "Cabinets are planned with the counter and the backsplash, so the lines meet.",
+      "Hardware and the finish are part of the cabinet scope, not a separate errand.",
+    ],
+    projects: [
+      "New base and wall cabinets in a kitchen that is being rearranged",
+      "Refacing doors and drawer fronts where the layout stays",
+      "A run of cabinets that has to meet a new counter and a new backsplash",
+    ],
+    image: null,
+    concept: "cabinets",
+    related: ["full-kitchen-remodels", "countertops", "kitchen-islands-layout"],
+  },
+  {
+    slug: "countertops",
+    group: "kitchen",
+    name: "Countertops",
+    title: "Kitchen Countertops in Springfield, IL | Andre Preer",
+    description:
+      "Kitchen countertops in Springfield and Central Illinois, set with the cabinets and the backsplash so the edges are part of one plan.",
+    summary: "The working surface, templated and set so it meets the cabinets and the backsplash.",
+    h1: "Countertops",
+    problem:
+      "A new counter on old cabinets, or a backsplash that was measured to a counter you are about to tear out, leaves the kitchen looking pieced together.",
+    solution:
+      "Countertops are measured to the cabinets that will actually be there, and to the backsplash that will land on them. The edge, the sink, and the cooktop are part of that layout.",
+    benefits: [
+      "The surface is planned with the cabinet run, not dropped on after the fact.",
+      "The backsplash has a real edge to meet.",
+      "You decide the material in the consultation. This page does not pretend a specific product is the house standard.",
+    ],
+    projects: [
+      "A counter replacement with the existing cabinet layout",
+      "New counters as part of a full remodel",
+      "A sink or cooktop opening laid out with the backsplash and the cabinet seams",
+    ],
+    image: null,
+    concept: "countertops",
+    related: ["backsplash-installation", "cabinets", "kitchen-islands-layout"],
+  },
+  {
+    slug: "kitchen-islands-layout",
+    group: "kitchen",
+    name: "Islands and layout changes",
+    title: "Kitchen Islands & Layout Changes in Springfield, IL | Andre Preer",
+    description:
+      "Kitchen islands and layout changes in Springfield and Central Illinois, including when an island does not fit the room.",
+    summary: "Moving the work zone, and adding an island only when the walk space can spare it.",
+    h1: "Islands and layout changes",
+    problem:
+      "An island in a room that cannot spare the walkway makes the kitchen harder to use. Leaving a cramped layout alone because the cabinets are new does the same thing.",
+    solution:
+      "Layout comes first. Andre looks at the doors, the windows, and how you actually cook and pass through. An island is in the plan when the clearances work. If they do not, the plan says so.",
+    benefits: [
+      "You do not get an island as a default.",
+      "A layout change is tied to the cabinets, the counters, and the backsplash, so those are not ordered for a floor plan you are about to abandon.",
+      "The kitchen can stay in conversation with a door to the yard when that is part of how you live.",
+    ],
+    projects: [
+      "An island added where the aisles still work",
+      "A work zone moved off a cramped wall",
+      "A layout that lines a door, a window, or a view up with the counter",
+    ],
+    image: null,
+    concept: "island",
+    related: ["full-kitchen-remodels", "cabinets", "lighting-finishing"],
+  },
+  {
+    slug: "lighting-finishing",
+    group: "kitchen",
+    name: "Lighting and finishing",
+    title: "Kitchen Lighting & Finishing in Springfield, IL | Andre Preer",
+    description:
+      "Kitchen lighting and finishing touches in Springfield and Central Illinois: fixtures, hardware, and the details that complete the cabinets and backsplash.",
+    summary: "Fixtures, hardware, and the last details that make the cabinets and backsplash look complete.",
+    h1: "Lighting and finishing touches",
+    problem:
+      "A new backsplash under the old fixture, or new cabinets with the original hardware, still reads as unfinished. The last layer is what people see at night.",
+    solution:
+      "Finishing is planned with the rest of the kitchen: fixtures, hardware, and the small edges that meet the backsplash and the cabinets. It can close a remodel or be a shorter scope on a kitchen you are keeping.",
+    benefits: [
+      "The light you cook under is chosen with the cabinet finish and the backsplash, not from a leftover ceiling box.",
+      "Hardware and trim are in the same conversation as the doors and the tile.",
+      "This is finishing work inside the kitchen scope. It is not a license claim.",
+    ],
+    projects: [
+      "Fixtures over an island, a sink, or a work run",
+      "Hardware and the small trim that finishes new or refaced cabinets",
+      "The last pass after a backsplash and counter are in",
+    ],
+    image: null,
+    concept: "lighting",
+    related: ["backsplash-installation", "cabinets", "kitchen-islands-layout"],
   },
 ];
 
@@ -256,18 +431,22 @@ export function serviceBySlug(slug: string): Service | undefined {
   return services.find((service) => service.slug === slug);
 }
 
+export function servicesIn(group: Service["group"]): Service[] {
+  return services.filter((service) => service.group === group);
+}
+
 export const reasons = [
   {
     title: "Design and build stay together",
-    text: "The plan is not drawn by one company and installed by another. Andre designs the work and carries it through the build, so the walk-through and the finished yard are the same conversation.",
+    text: "The plan is not drawn by one company and installed by another. Andre carries the kitchen, the yard, or both from the walk-through through the build.",
   },
   {
-    title: "One composition, not separate tickets",
-    text: "Walls, planting, fire, outdoor rooms, and specialty stone are drawn as one picture when the property needs more than a single trade.",
+    title: "The backsplash is part of the kitchen",
+    text: "Tile, cabinets, and the counter are decided together. The backsplash is not a strip added after the other pieces are already fixed.",
   },
   {
-    title: "Stone and planting, handled as craft",
-    text: "Limestone, hardscape, shrubs, trees, and roses are part of the same practice. A wall can hold grade and still belong next to the bed it edges.",
+    title: "The yard is still part of the practice",
+    text: "Limestone, planting, patios, and fire features stay in the work. A kitchen project does not retire the exterior pages.",
   },
   {
     title: "Sized to Central Illinois houses",
@@ -284,7 +463,7 @@ export const processSteps = [
   {
     n: "02",
     title: "Site visit and consultation",
-    text: "Andre walks the property with you. The visit is for how you use the place, and for sun, grade, views, and the parts already worth keeping.",
+    text: "Andre walks the kitchen, the yard, or both with you. The visit is for how you cook and how you use the grounds, and for what is already worth keeping.",
   },
   {
     n: "03",
@@ -294,7 +473,7 @@ export const processSteps = [
   {
     n: "04",
     title: "Build",
-    text: "The agreed work is installed with care: hardscape set true, plants placed with their mature size in mind, and stone detail finished when it is part of the scope.",
+    text: "The agreed work is installed with care. In a kitchen that means cabinets, counters, backsplash, and the finish. Outside, hardscape is set true and plants are placed with their mature size in mind.",
   },
   {
     n: "05",
@@ -308,7 +487,7 @@ export function businessJsonLd() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["HomeAndConstructionBusiness", "LocalBusiness"],
+        "@type": ["GeneralContractor", "HomeAndConstructionBusiness"],
         "@id": `${site.url}/#business`,
         name: site.name,
         url: `${site.url}/`,
@@ -316,7 +495,7 @@ export function businessJsonLd() {
         email: site.email,
         image: `${site.url}/og.jpg`,
         description:
-          "Residential landscape design and installation, limestone and stonework, patios and outdoor living, fire features, planting, and specialty stone for Springfield and Central Illinois. Andre M. Preer II.",
+          "Kitchen remodeling, backsplash installation, cabinets, countertops, and landscape, stone, and outdoor living for Springfield and Central Illinois. Andre M. Preer II.",
         address: {
           "@type": "PostalAddress",
           addressLocality: site.locality,
@@ -328,13 +507,15 @@ export function businessJsonLd() {
           { "@type": "AdministrativeArea", name: "Central Illinois" },
         ],
         knowsAbout: [
+          "Kitchen remodeling",
+          "Backsplash installation",
+          "Kitchen cabinets",
+          "Countertops",
           "Landscape design",
-          "Landscape installation",
           "Limestone walls",
           "Hardscaping",
           "Planting",
           "Outdoor living",
-          "Fire features",
         ],
         contactPoint: [
           {
@@ -355,7 +536,7 @@ export function businessJsonLd() {
         ],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: "Residential landscape and stonework",
+          name: "Kitchens, landscape, and stonework",
           itemListElement: services.map((service) => ({
             "@type": "Offer",
             itemOffered: {

@@ -55,7 +55,7 @@ async function ogImage(hero) {
     </defs>
     <rect width="1200" height="630" fill="url(#g)"/>
     <text x="64" y="270" fill="#f3efe6" font-family="Liberation Serif, DejaVu Serif, serif" font-size="72">Andre Preer</text>
-    <text x="64" y="332" fill="#e4dccf" font-family="Inter, Liberation Sans, sans-serif" font-size="26">Landscape, stone &amp; outdoor living</text>
+    <text x="64" y="332" fill="#e4dccf" font-family="Inter, Liberation Sans, sans-serif" font-size="26">Kitchens, landscape &amp; stone</text>
     <text x="64" y="386" fill="#d9d0c3" font-family="Inter, Liberation Sans, sans-serif" font-size="20">Springfield &amp; Central Illinois</text>
   </svg>`);
   await sharp({

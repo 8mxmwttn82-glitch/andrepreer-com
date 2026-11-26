@@ -1,12 +1,20 @@
 # Andre Preer site report
 
+The practice on this site is both kitchen remodeling and landscape, stone, and outdoor living. The home page leads with kitchens and backsplash while `src/data/season.ts` is `"interior"`. Set that value to `"exterior"` in spring and the home hero follows. Exterior service pages were not removed.
+
 ## Pages
 
 | URL | Role |
 | --- | --- |
 | `/` | Home: hero, services, reference images, why call, approach, service area, closing call |
 | `/about/` | Who Andre is and how he reads a property. No invented biography. |
-| `/services/` | Overview of every service |
+| `/services/` | Kitchens, exterior, and whole-property services |
+| `/services/full-kitchen-remodels/` | Full kitchen remodels |
+| `/services/backsplash-installation/` | Backsplash installation |
+| `/services/cabinets/` | New cabinets and refacing |
+| `/services/countertops/` | Countertops |
+| `/services/kitchen-islands-layout/` | Islands and layout changes |
+| `/services/lighting-finishing/` | Lighting and finishing |
 | `/services/landscape-design-installation/` | Landscape design and installation |
 | `/services/trees-shrubs-roses/` | Trees, shrubs, roses, and planting |
 | `/services/limestone-walls-stonework/` | Limestone walls and decorative stone |
@@ -78,7 +86,7 @@ Against `wrangler dev`:
 - `MAIL_PROVIDER=mock` with `ALLOW_MOCK_EMAIL=true`: 200, `mock: true`, including a one-file photo upload (`attachmentCount: 1`).
 - `GET /api/form-config` returns the Turnstile site key only when both keys exist, and does not return the secret or the Resend key.
 
-Lighthouse (mobile and desktop, local Worker dev), home page: performance 100, accessibility 100, best practices 100, SEO 100. Largest contentful paint about 1.7s on mobile.
+Lighthouse after the kitchen-led home page (mobile and desktop) and the contact page (mobile): performance 100, accessibility 100, best practices 100, SEO 100.
 
 Contact page, before the script was moved out of the HTML: performance 100, accessibility 100, SEO 100, best practices 92, because an inline module was blocked by Content-Security-Policy. That script now loads from `/contact-form.js`. The gallery script loads from `/lightbox.js`. JSON-LD is `application/ld+json` and is not executed.
 

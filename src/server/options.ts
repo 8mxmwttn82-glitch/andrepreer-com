@@ -1,4 +1,10 @@
 export const projectTypes = [
+  { value: "full-kitchen-remodels", label: "Full kitchen remodel" },
+  { value: "backsplash-installation", label: "Backsplash installation" },
+  { value: "cabinets", label: "Cabinets — new or refacing" },
+  { value: "countertops", label: "Countertops" },
+  { value: "kitchen-islands-layout", label: "Kitchen island or layout change" },
+  { value: "lighting-finishing", label: "Lighting and finishing" },
   { value: "landscape-design-installation", label: "Landscape design & installation" },
   { value: "trees-shrubs-roses", label: "Trees, shrubs, roses & planting" },
   { value: "limestone-walls-stonework", label: "Limestone walls & stonework" },

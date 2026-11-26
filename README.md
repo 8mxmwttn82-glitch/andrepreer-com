@@ -1,6 +1,6 @@
 # Andre Preer
 
-Marketing site for Andre M. Preer II, a residential landscape, hardscape, and stonework practice in Springfield and Central Illinois. The site is a static build plus a Cloudflare Worker that serves the files and accepts consultation requests at `POST /api/contact`.
+Marketing site for Andre M. Preer II. The practice covers kitchen remodeling and landscape, stone, and outdoor living in Springfield and Central Illinois. The site is a static build plus a Cloudflare Worker that serves the files and accepts consultation requests at `POST /api/contact`.
 
 Primary phone: [309-431-1805](tel:+13094311805). Alternate: 702-232-6150. Email: belicimo8@gmail.com. Service area: Springfield and Central Illinois. The street address is intentionally not published.
 
@@ -11,6 +11,41 @@ Primary phone: [309-431-1805](tel:+13094311805). Alternate: 702-232-6150. Email:
 - Responsive AVIF and WebP generated with Sharp
 - Cloudflare Worker with [static assets](https://developers.cloudflare.com/workers/static-assets/) (`wrangler.jsonc`)
 - Optional Pages Functions in `functions/` that call the same handler. The Worker is the deploy target.
+
+## Seasonal home page
+
+One setting controls the home page. Service pages, the form, and the navigation links for both kinds of work stay either way.
+
+In `src/data/season.ts`:
+
+```ts
+export const seasonEmphasis = "interior";
+```
+
+- `"interior"` is the winter setting. The hero, the featured backsplash, and the before/after lead with kitchen work. Exterior services stay in the header (Exterior), on `/services/#exterior`, and in a section lower on the home page.
+- `"exterior"` is the spring setting. Change that one value. The hero and the featured block lead with landscape and stone. Kitchen services move to the lower home section and stay under Kitchens in the header.
+
+Rebuild after you change it.
+
+## Concept images, and real job photos later
+
+Concept photographs live in `src/assets/concepts/`. Astro builds responsive WebP and AVIF from them. Replace a file and rebuild to swap a picture. Captions stay “Design concept” or “Backsplash style idea.”
+
+| Name | Where it appears |
+| --- | --- |
+| `hero-kitchen.jpg` | Winter home hero |
+| `backsplash-before.jpg`, `backsplash-after.jpg` | Featured backsplash before/after |
+| `kitchen-before.jpg`, `kitchen-after.jpg` | Full-kitchen before/after on the gallery and remodel page |
+| `house-exterior.jpg` | About page and the service-area section |
+| `herringbone.jpg` | Backsplash page |
+| `cabinets.jpg`, `countertops.jpg`, `island.jpg` | Those service pages |
+| `landscaped-bed.jpg` | Landscape page |
+| `stone-patio.jpg` | Stonework page |
+| `outdoor-fire.jpg` | Outdoor living and fire pages, and the spring home hero |
+
+Captions stay short and neutral: “Design concept” or “Backsplash style idea”. Do not retitle a file into a client name or a street.
+
+To swap in a real job later, put the photograph at one of those names and rebuild. If Andre wants that picture described as a finished job, change the caption in the component that renders it. Do not add a customer name or an address unless he has confirmed both.
 
 ## Local development
 

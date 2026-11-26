@@ -32,6 +32,19 @@ function jpeg(size = 32): File {
   return new File([bytes], "yard photo.jpg", { type: "image/jpeg" });
 }
 
+test("a kitchen project type is accepted and still not pretended as sent", async () => {
+  const response = await handleContact(
+    formRequest({
+      ...valid,
+      project_type: "backsplash-installation",
+      description: "The wall behind the range needs a backsplash that meets the counter we are keeping.",
+    }),
+    {},
+  );
+  assert.equal(response.status, 503);
+  assert.equal((await response.json()).code, "unconfigured");
+});
+
 test("validation rejects an incomplete submission", async () => {
   const response = await handleContact(formRequest({ ...valid, email: "nope", description: "too short" }), {});
   assert.equal(response.status, 400);

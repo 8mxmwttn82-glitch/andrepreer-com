@@ -1,43 +1,109 @@
 ---
 import Base from "../../layouts/Base.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import ConceptSlot from "../../components/ConceptSlot.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import RefFigure from "../../components/RefFigure.astro";
-import { photos, services } from "../../data/site";
+import { photos, servicesIn } from "../../data/site";
+import { seasonEmphasis } from "../../data/season";
+
+const kitchens = servicesIn("kitchen");
+const exterior = servicesIn("exterior");
+const property = servicesIn("property");
+const groups =
+  seasonEmphasis === "interior"
+    ? [
+        { id: "kitchens", eyebrow: "Interior", title: "Kitchens", items: kitchens },
+        { id: "exterior", eyebrow: "Exterior", title: "Landscape, stone, and outdoor living", items: exterior },
+      ]
+    : [
+        { id: "exterior", eyebrow: "Exterior", title: "Landscape, stone, and outdoor living", items: exterior },
+        { id: "kitchens", eyebrow: "Interior", title: "Kitchens", items: kitchens },
+      ];
 ---
 
 <Base
-  title="Landscape, Stone & Outdoor Living Services | Andre Preer"
-  description="Services from Andre Preer in Springfield, Illinois: landscape design, planting, limestone walls, patios, fire features, specialty stone, and interior-exterior work."
+  title="Kitchen & Landscape Services in Springfield, IL | Andre Preer"
+  description="Andre Preer in Springfield, Illinois: kitchen remodels, backsplash, cabinets, and countertops, plus landscape, limestone, patios, planting, and outdoor living."
 >
   <main id="main">
     <section>
       <div class="wrap">
         <Breadcrumbs crumbs={[{ name: "Home", href: "/" }, { name: "Services", href: "/services/" }]} />
         <p class="eyebrow">Services</p>
-        <h1>The work, in the pieces a property actually needs</h1>
+        <h1>Kitchens inside. The yard outside.</h1>
         <p class="lede">
-          Most calls are about more than one of these. They are separated here so you can see what each one is for. A project can be a single bed or a whole property.
+          Both are on this site all year. The home page leads with one of them depending on the season. A project can be a backsplash, a full kitchen, a wall, a planting bed, or the property taken together.
+        </p>
+        <p>
+          <a href="#kitchens">Kitchens</a>
+          <span aria-hidden="true"> · </span>
+          <a href="#exterior">Exterior</a>
         </p>
       </div>
     </section>
-    <section class="tight">
+    {
+      groups.map((group) => (
+        <section class="tight" id={group.id}>
+          <div class="wrap">
+            <p class="eyebrow">{group.eyebrow}</p>
+            <h2>{group.title}</h2>
+            {group.items.map((service) => (
+              <article class="split stack">
+                <div>
+                  <h3>
+                    <a href={`/services/${service.slug}/`}>{service.name}</a>
+                  </h3>
+                  <p>{service.summary}</p>
+                  <p>{service.problem}</p>
+                  <p>
+                    <a href={`/services/${service.slug}/`}>About {service.name.toLowerCase()}</a>
+                  </p>
+                </div>
+                {service.concept ? (
+                  <ConceptSlot
+                    id={service.concept}
+                    label="Design concept"
+                    alt={`${service.name}. Design concept, not a finished Andre Preer project.`}
+                  />
+                ) : service.image ? (
+                  <RefFigure photo={photos[service.image]} sizes="(min-width: 900px) 28rem, 100vw" />
+                ) : (
+                  <div class="plain-panel">
+                    <p>Photographs of this work are not published yet. Ask to see examples when you talk with Andre.</p>
+                  </div>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+    <section class="tight" id="property">
       <div class="wrap">
+        <p class="eyebrow">The whole property</p>
+        <h2>When the kitchen and the grounds are one plan</h2>
         {
-          services.map((service) => (
+          property.map((service) => (
             <article class="split stack">
               <div>
-                <h2><a href={`/services/${service.slug}/`}>{service.name}</a></h2>
+                <h3>
+                  <a href={`/services/${service.slug}/`}>{service.name}</a>
+                </h3>
                 <p>{service.summary}</p>
-                <p>{service.problem}</p>
-                <p><a href={`/services/${service.slug}/`}>About {service.name.toLowerCase()}</a></p>
+                <p>
+                  <a href={`/services/${service.slug}/`}>About {service.name.toLowerCase()}</a>
+                </p>
               </div>
-              {service.image ? <RefFigure photo={photos[service.image]} sizes="(min-width: 900px) 28rem, 100vw" /> : <div class="plain-panel"><p>Photographs of this work are not published yet. The description is the specific part; ask to see examples when you talk with Andre.</p></div>}
+              {service.image && <RefFigure photo={photos[service.image]} sizes="(min-width: 900px) 28rem, 100vw" />}
             </article>
           ))
         }
       </div>
     </section>
-    <CtaBand heading="Not sure which of these you need?" text="Describe the property. Andre will tell you what belongs in the scope and what does not." />
+    <CtaBand
+      heading="Not sure which of these you need?"
+      text="Describe the kitchen, the yard, or both. Andre will tell you what belongs in the scope."
+    />
   </main>
 </Base>

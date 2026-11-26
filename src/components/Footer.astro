@@ -1,5 +1,8 @@
 ---
-import { nav, site } from "../data/site";
+import { site } from "../data/site";
+import { seasonalNav } from "../data/season";
+
+const nav = seasonalNav();
 const year = new Date().getFullYear();
 ---
 
@@ -7,7 +10,7 @@ const year = new Date().getFullYear();
   <div class="wrap footer-grid">
     <div>
       <p class="brand-name">Andre Preer</p>
-      <p class="fine">Landscape, limestone, planting, and outdoor living for {site.area}.</p>
+      <p class="fine">Kitchens, landscape, and stonework for {site.area}.</p>
       <p class="fine">{site.person}</p>
     </div>
     <div>

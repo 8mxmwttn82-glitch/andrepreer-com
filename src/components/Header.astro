@@ -1,10 +1,15 @@
 ---
-import { nav, site } from "../data/site";
+import { site } from "../data/site";
+import { seasonalNav } from "../data/season";
+
+const nav = seasonalNav();
 
 const path = Astro.url.pathname;
 function current(href: string) {
-  if (href === "/") return path === "/";
-  return path === href || path.startsWith(href);
+  const clean = href.split("#")[0];
+  if (clean === "/") return path === "/";
+  if (href.includes("#")) return false;
+  return path === clean || path.startsWith(clean);
 }
 ---
 

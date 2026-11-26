@@ -1,0 +1,49 @@
+---
+import { Picture } from "astro:assets";
+import { conceptImages } from "../data/concepts";
+
+interface Props {
+  id: string;
+  alt: string;
+  label: string;
+  kicker?: string;
+  ratio?: "wide" | "photo" | "tall";
+  priority?: boolean;
+  bare?: boolean;
+}
+
+const { id, alt, label, kicker, ratio = "photo", priority = false, bare = false } = Astro.props;
+const image = conceptImages[id];
+---
+
+<figure class="concept">
+  {
+    image ? (
+      <div class:list={["frame", `ratio-${ratio}`]}>
+        <Picture
+          src={image}
+          formats={["avif", "webp"]}
+          widths={[480, 768, 1200, 1600]}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          fetchpriority={priority ? "high" : "auto"}
+        />
+        {kicker && <span class="concept-kicker">{kicker}</span>}
+      </div>
+    ) : (
+      <div class:list={["concept-slot", `ratio-${ratio}`]} role="img" aria-label={alt}>
+        {kicker && <span class="concept-kicker">{kicker}</span>}
+        <span class="concept-label">{label}</span>
+      </div>
+    )
+  }
+  {
+    !bare && (
+      <figcaption>
+        <span class="tag">{kicker || label}</span>
+        Not a finished project, and not a client’s address.
+      </figcaption>
+    )
+  }
+</figure>

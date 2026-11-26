@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
+import BeforeAfter from "../components/BeforeAfter.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
+import ConceptSlot from "../components/ConceptSlot.astro";
 import CtaBand from "../components/CtaBand.astro";
 import Picture from "../components/Picture.astro";
 import { photos } from "../data/site";
@@ -22,22 +24,55 @@ const gallery = [
 ---
 
 <Base
-  title="Reference Gallery | Andre Preer, Springfield IL"
-  description="Reference photographs for Andre Preer’s Springfield landscape and stonework practice. These are not labeled as finished client projects."
+  title="Kitchen Concepts & Exterior References | Andre Preer"
+  description="Design concepts for kitchens and backsplashes, plus reference photos for landscape and stone. None of these are labeled as finished Andre Preer jobs."
 >
   <main id="main">
     <section>
       <div class="wrap">
         <Breadcrumbs crumbs={[{ name: "Home", href: "/" }, { name: "Work", href: "/portfolio/" }]} />
         <p class="eyebrow">Gallery</p>
-        <h1>Reference images, clearly labeled</h1>
+        <h1>Concepts for the kitchen. References for the yard.</h1>
         <p class="lede">
-          There is not a verified set of Andre’s finished projects on this site. The photographs below are references for the kinds of houses, plantings, and materials the work is planned around. They are not client projects, not locations he claims, and not before-and-after pairs. House numbers visible in a photo belong to that reference image. They are not this business’s address.
+          There is not a verified set of Andre’s finished projects on this site. The kitchen frames are design concepts. The yard photographs are references for houses, plantings, and materials. None of them are client jobs, and none of them name a street.
         </p>
-        <p>Nothing here is filtered into fake project categories. When there are real job photographs Andre wants published, they can replace these.</p>
       </div>
     </section>
     <section class="tight">
+      <div class="wrap">
+        <h2>Backsplash style idea</h2>
+        <BeforeAfter
+          beforeId="backsplash-before"
+          afterId="backsplash-after"
+          caption="Backsplash style idea"
+          beforeAlt="Design concept of a kitchen wall before a backsplash. Not a finished project."
+          afterAlt="Design concept of a kitchen backsplash. Not a finished Andre Preer project."
+        />
+      </div>
+    </section>
+    <section class="tight">
+      <div class="wrap">
+        <h2>A full kitchen, as a design concept</h2>
+        <BeforeAfter
+          beforeId="kitchen-before"
+          afterId="kitchen-after"
+          caption="Design concept"
+          beforeAlt="Design concept of a kitchen before remodeling. Not a finished project."
+          afterAlt="Design concept of a remodeled kitchen. Not a finished Andre Preer project."
+        />
+        <div class="ref-grid concept-grid">
+          <ConceptSlot id="cabinets" label="Design concept" alt="Design concept of kitchen cabinets. Not a finished project." />
+          <ConceptSlot id="countertops" label="Design concept" alt="Design concept of a kitchen countertop. Not a finished project." />
+          <ConceptSlot id="island" label="Design concept" alt="Design concept of a kitchen island. Not a finished project." />
+          <ConceptSlot id="herringbone" label="Backsplash style idea" alt="Herringbone tile backsplash in cream and pale green. Design concept, not a finished project." />
+        </div>
+      </div>
+    </section>
+    <section class="tight">
+      <div class="wrap">
+        <h2>Exterior reference photographs</h2>
+        <p>These are not before-and-after pairs. House numbers in a photo belong to that reference image. They are not this business’s address.</p>
+      </div>
       <div class="wrap gallery" id="gallery">
         {
           gallery.map((photo) => (

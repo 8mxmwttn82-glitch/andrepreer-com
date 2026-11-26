@@ -1,14 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
+import ConceptSlot from "../components/ConceptSlot.astro";
 import CtaBand from "../components/CtaBand.astro";
-import RefFigure from "../components/RefFigure.astro";
-import { photos, site } from "../data/site";
+import { site } from "../data/site";
 ---
 
 <Base
-  title="About Andre Preer | Springfield Landscape & Stonework"
-  description="Andre M. Preer II designs and builds residential landscapes and stonework in Springfield and Central Illinois. How he reads a property, without a brochure biography."
+  title="About Andre Preer | Kitchens & Landscape in Springfield, IL"
+  description="Andre M. Preer II remodels kitchens and builds landscape and stonework in Springfield and Central Illinois. How he looks at a property, without a brochure biography."
 >
   <main id="main">
     <section>
@@ -17,33 +17,43 @@ import { photos, site } from "../data/site";
         <p class="eyebrow">The person you are calling</p>
         <h1>{site.person}</h1>
         <p class="lede">
-          Andre Preer designs and builds residential landscapes in {site.area}: planting, limestone and other stone, patios and outdoor rooms, fire features, and specialty stone detail when a project needs it.
+          Andre Preer works on houses in {site.area} in two places: the kitchen, and the grounds. Inside, that is remodels, backsplash, cabinets, countertops, islands, and finishing. Outside, it is planting, limestone, patios, fire features, and specialty stone.
         </p>
       </div>
     </section>
     <section class="tight">
       <div class="wrap split">
-        <RefFigure photo={photos["stone-home-plantings"]} sizes="(min-width: 900px) 36rem, 100vw" />
+        <ConceptSlot
+          id="house-exterior"
+          label="Design concept"
+          alt="Brick ranch house with a lawn, a shade tree, and foundation shrubs. Design concept, not a finished project and not an address."
+        />
         <div class="prose">
           <h2>How a property gets read</h2>
           <p>
-            The first useful hour is on the site. Andre walks it with you and pays attention to sun, grade, views, how you move between the door and the yard, and which existing trees, walls, or beds are worth keeping. The plan starts from that, not from a template of outdoor rooms.
+            The first useful hour is in the room or on the site. In a kitchen, that means how you cook, what you are willing to move, and which cabinets or counters are worth keeping. Outside, it means sun, grade, views, and the parts of the yard already worth keeping.
           </p>
-          <h2>Design and build stay in one pair of hands</h2>
+          <h2>One scope, then the build</h2>
           <p>
-            A lot of landscape work splits in half: someone draws it, someone else who never made the walk installs a version of it. Here the design and the installation stay with Andre, so the scope you agree to is the scope that gets built.
+            The plan is not handed from a drawing to a separate crew that never stood in the room. Andre carries the scope you agree to through the build, whether that scope is a backsplash, a full kitchen, a wall, or the yard.
           </p>
           <h2>What this page will not pretend</h2>
           <p>
-            There is no year-in-business claim, no license number, and no award list on this site, because those facts are not established here. If they matter to your decision, ask on the call. The work to judge is the plan for your property, and jobs you can see in person.
+            There is no year-in-business claim, no license number, and no award list here, because those facts are not established on this site. If they matter, ask on the call. Judge the plan for your kitchen or your yard, and jobs you can see in person.
           </p>
-          <p><a href="/process/">How a project proceeds</a> · <a href="/services/">Services</a></p>
+          <p>
+            <a href="/services/#kitchens">Kitchens</a>
+            <span aria-hidden="true"> · </span>
+            <a href="/services/#exterior">Exterior</a>
+            <span aria-hidden="true"> · </span>
+            <a href="/process/">Process</a>
+          </p>
         </div>
       </div>
     </section>
     <CtaBand
-      heading="Call Andre about your property."
-      text="Springfield and the surrounding Central Illinois towns. Say where the house is and what you want changed."
+      heading="Call Andre about the kitchen or the yard."
+      text="Springfield and the surrounding Central Illinois towns. Say which one you want to change."
     />
   </main>
 </Base>

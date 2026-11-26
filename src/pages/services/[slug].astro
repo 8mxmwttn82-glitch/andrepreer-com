@@ -2,6 +2,8 @@
 import Base from "../../layouts/Base.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import CtaBand from "../../components/CtaBand.astro";
+import BeforeAfter from "../../components/BeforeAfter.astro";
+import ConceptSlot from "../../components/ConceptSlot.astro";
 import RefFigure from "../../components/RefFigure.astro";
 import { photos, serviceBySlug, services, site } from "../../data/site";
 
@@ -42,12 +44,48 @@ const jsonLd = {
     <section class="tight">
       <div class="wrap split">
         {
-          photo ? (
+          service.slug === "backsplash-installation" ? (
+            <div class="stack">
+              <ConceptSlot
+                id="herringbone"
+                label="Backsplash style idea"
+                alt="Close view of a herringbone tile backsplash in cream and pale green. Design concept, not a finished project."
+              />
+              <BeforeAfter
+                beforeId="backsplash-before"
+                afterId="backsplash-after"
+                caption="Backsplash style idea"
+                beforeAlt="Oak kitchen cabinets and a short tile backsplash at a sink window, shown as the before side of a design concept."
+                afterAlt="The same sink wall with a taller pale tile backsplash and a light counter. Design concept, not a finished project."
+              />
+            </div>
+          ) : service.slug === "full-kitchen-remodels" ? (
+            <div class="stack">
+              <BeforeAfter
+                beforeId="kitchen-before"
+                afterId="kitchen-after"
+                caption="Design concept"
+                beforeAlt="Oak kitchen with a laminate floor and a peninsula, shown as the before side of a design concept."
+                afterAlt="The same kitchen layout with white cabinets, a pale backsplash, and wood-look flooring. Design concept, not a finished project."
+              />
+              <ConceptSlot
+                id="island"
+                label="Design concept"
+                alt="A wood and white kitchen island with a stone top and two glass pendants. Design concept, not a finished project."
+              />
+            </div>
+          ) : service.concept ? (
+            <ConceptSlot
+              id={service.concept}
+              label="Design concept"
+              alt={`${service.name}. Design concept, not a finished Andre Preer project.`}
+            />
+          ) : photo ? (
             <RefFigure photo={photo} sizes="(min-width: 900px) 36rem, 100vw" />
           ) : (
             <div class="plain-panel">
               <p class="eyebrow">Photographs</p>
-              <p>No project photograph of this work is published here yet. The words on this page are the description. Ask Andre to show you the relevant work when you meet.</p>
+              <p>No project photograph of this work is published yet. Ask Andre to show you examples when you meet.</p>
             </div>
           )
         }

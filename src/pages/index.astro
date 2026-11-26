@@ -1,55 +1,149 @@
 ---
 import Base from "../layouts/Base.astro";
+import BeforeAfter from "../components/BeforeAfter.astro";
+import ConceptSlot from "../components/ConceptSlot.astro";
 import CtaBand from "../components/CtaBand.astro";
-import Picture from "../components/Picture.astro";
-import { businessJsonLd, photos, processSteps, reasons, services, site } from "../data/site";
-import manifest from "../data/images.json";
+import { businessJsonLd, processSteps, reasons, servicesIn, site } from "../data/site";
+import { seasonEmphasis } from "../data/season";
 
-const hero = photos["residential-home-dusk"];
-const meta = (manifest as Record<string, { widths: number[] }>)[hero.id];
-const preload = {
-  href: `/images/${hero.id}-${meta.widths[meta.widths.length - 1]}.avif`,
-  srcset: meta.widths.map((width) => `/images/${hero.id}-${width}.avif ${width}w`).join(", "),
-  sizes: "100vw",
-};
-const homeLd = businessJsonLd();
+const interior = seasonEmphasis === "interior";
+const preload = undefined;
+const featured = interior ? servicesIn("kitchen") : servicesIn("exterior");
+const later = interior ? servicesIn("exterior") : servicesIn("kitchen");
+const laterTitle = interior ? "The yard, the stone, and the outdoor rooms" : "Kitchens, when you are ready to come inside";
+const laterCopy = interior
+  ? "Landscape, limestone, patios, planting, and fire features are still part of the practice. They sit below the kitchen work on this page because the season is interior. The service pages themselves do not change."
+  : "Full remodels, backsplash, cabinets, counters, islands, and finishing stay on the site all year. In this season the home page leads with the yard.";
 ---
 
 <Base
-  title="Andre Preer | Landscape, Stone & Outdoor Living in Springfield, IL"
-  description="Andre M. Preer II designs and builds residential landscapes in Springfield and Central Illinois: planting, limestone, patios, fire features, and specialty stone."
-  jsonLd={homeLd}
+  title={interior
+    ? "Kitchen Remodeling & Backsplash in Springfield, IL | Andre Preer"
+    : "Landscape, Stone & Outdoor Living in Springfield, IL | Andre Preer"}
+  description={interior
+    ? "Andre Preer remodels kitchens in Springfield and Central Illinois, with backsplash installation up front, and still builds landscape, stone, and outdoor rooms."
+    : "Andre Preer designs and builds landscapes, limestone, and outdoor rooms in Springfield and Central Illinois, and remodels kitchens, including backsplash and cabinets."}
+  jsonLd={businessJsonLd()}
   preload={preload}
 >
   <main id="main">
-    <section class="hero" aria-label="Introduction">
-      <div class="hero-media">
-        <Picture photo={hero} sizes="100vw" priority={true} />
-      </div>
-      <div class="wrap hero-copy">
-        <p class="eyebrow">Springfield &amp; Central Illinois</p>
-        <h1>A whole yard, not one trade at a time.</h1>
-        <p class="lede">
-          {site.person} designs and builds residential landscapes — planting, limestone walls, patios, fire features, and specialty stone — as one plan for the way you actually live outside.
-        </p>
-        <div class="actions">
-          <a class="btn btn-light" href={`tel:${site.phoneTel}`}>Call Andre · {site.phoneDisplay}</a>
-          <a class="btn btn-ghost" href="/contact/">Request a consultation</a>
-        </div>
-        <p class="photo-note">Reference photograph of a house at dusk. Not a finished project, and not Andre’s address.</p>
-      </div>
-    </section>
+    {
+      interior ? (
+        <section class="hero-split" aria-label="Introduction">
+          <div class="wrap split hero-split-grid">
+            <div>
+              <p class="eyebrow">Springfield kitchens, this season</p>
+              <h1>The backsplash, and the kitchen around it.</h1>
+              <p class="lede">
+                {site.person} remodels kitchens in {site.area}: full remodels, backsplash, cabinets, countertops, islands, and the lighting that finishes the room. The yard and the stone are still part of the work. They are listed further down.
+              </p>
+              <div class="actions">
+                <a class="btn btn-solid" href={`tel:${site.phoneTel}`}>
+                  Call Andre · {site.phoneDisplay}
+                </a>
+                <a class="btn btn-line" href="/contact/?type=backsplash-installation">
+                  Request a consultation
+                </a>
+              </div>
+            </div>
+            <ConceptSlot
+              id="hero-kitchen"
+              ratio="photo"
+              priority={true}
+              label="Design concept"
+              alt="White kitchen with a farmhouse sink, pale tile backsplash, and a wood island. Design concept, not a finished project."
+            />
+          </div>
+        </section>
+      ) : (
+        <section class="hero-split" aria-label="Introduction">
+          <div class="wrap split hero-split-grid">
+            <div>
+              <p class="eyebrow">Springfield yards, this season</p>
+              <h1>A whole yard, not one trade at a time.</h1>
+              <p class="lede">
+                {site.person} designs and builds residential landscapes in {site.area}: planting, limestone, patios, fire features, and specialty stone. Kitchens and backsplash stay on the site. They are listed further down.
+              </p>
+              <div class="actions">
+                <a class="btn btn-solid" href={`tel:${site.phoneTel}`}>
+                  Call Andre · {site.phoneDisplay}
+                </a>
+                <a class="btn btn-line" href="/contact/">
+                  Request a consultation
+                </a>
+              </div>
+            </div>
+            <ConceptSlot
+              id="outdoor-fire"
+              ratio="photo"
+              priority={true}
+              label="Design concept"
+              alt="A stone patio with a fire pit and wooden chairs beside a brick house. Design concept, not a finished project."
+            />
+          </div>
+        </section>
+      )
+    }
 
     <section>
       <div class="wrap">
+        {
+          interior ? (
+            <>
+              <div class="section-head">
+                <p class="eyebrow">Featured</p>
+                <h2>Backsplash installation</h2>
+                <p>
+                  The backsplash is the piece that makes a kitchen look finished or look patched. Andre sets it with the counter and the cabinets, whether the job is only the tile or a full remodel.
+                </p>
+                <p>
+                  <a href="/services/backsplash-installation/">Read the backsplash service</a>
+                </p>
+              </div>
+              <BeforeAfter
+                beforeId="backsplash-before"
+                afterId="backsplash-after"
+                caption="Backsplash style idea"
+                beforeAlt="Oak cabinets and a short tile backsplash at a sink window. Before side of a design concept."
+                afterAlt="The same sink wall with a taller pale tile backsplash and a light stone counter. Design concept, not a finished project."
+              />
+            </>
+          ) : (
+            <>
+              <div class="section-head">
+                <p class="eyebrow">Featured</p>
+                <h2>Landscape, walls, and outdoor rooms</h2>
+                <p>
+                  Planting, limestone, patios, and fire features are planned as one yard. The photographs here are references, not a list of finished jobs.
+                </p>
+              </div>
+              <div class="ref-grid">
+                <ConceptSlot
+                  id="landscaped-bed"
+                  label="Design concept"
+                  alt="A brick house front with a planted bed of shrubs and flowers. Design concept, not a finished project."
+                />
+                <ConceptSlot
+                  id="stone-patio"
+                  label="Design concept"
+                  alt="An irregular stone patio and walk beside a brick house and lawn. Design concept, not a finished project."
+                />
+              </div>
+            </>
+          )
+        }
+      </div>
+    </section>
+
+    <section class="tight">
+      <div class="wrap">
         <div class="section-head">
-          <p class="eyebrow">What he builds</p>
-          <h2>What Andre can do for a property</h2>
-          <p class="muted">Landscaping, stone, planting, fire, and the rooms between the house and the yard. Each is its own page if you want the detail.</p>
+          <p class="eyebrow">{interior ? "This season" : "On the grounds"}</p>
+          <h2>{interior ? "What a kitchen project can include" : "What a yard project can include"}</h2>
         </div>
         <ol class="service-index">
           {
-            services.map((service, index) => (
+            featured.map((service, index) => (
               <li>
                 <a href={`/services/${service.slug}/`}>
                   <span class="num">{String(index + 1).padStart(2, "0")}</span>
@@ -69,32 +163,28 @@ const homeLd = businessJsonLd();
     <section>
       <div class="wrap">
         <div class="section-head">
-          <p class="eyebrow">Selected work</p>
-          <h2>Reference pictures, not a job list</h2>
+          <p class="eyebrow">{interior ? "A full kitchen" : "Before and after"}</p>
+          <h2>{interior ? "The room, before and after the idea" : "A kitchen concept, kept on the page"}</h2>
           <p>
-            Verified photographs of finished Springfield projects are not on this site yet. These are reference images — houses, plantings, and materials — not completed jobs, not client names, and not before-and-after pairs. Ask to see work in person.
+            These frames are design concepts. They are not photographs of a finished Andre Preer kitchen, and they are not tied to a customer or a street.
           </p>
-          <p><a href="/portfolio/">Open the reference gallery</a></p>
         </div>
-        <div class="ref-grid">
-          <figure>
-            <div class="frame"><Picture photo={photos["stone-home-plantings"]} sizes="(min-width: 720px) 50vw, 100vw" /></div>
-            <figcaption><span class="tag">Reference</span> {photos["stone-home-plantings"].caption}</figcaption>
-          </figure>
-          <figure>
-            <div class="frame"><Picture photo={photos["front-entry-planting"]} sizes="(min-width: 720px) 50vw, 100vw" /></div>
-            <figcaption><span class="tag">Reference</span> {photos["front-entry-planting"].caption}</figcaption>
-          </figure>
-        </div>
+        <BeforeAfter
+          beforeId="kitchen-before"
+          afterId="kitchen-after"
+          caption="Design concept"
+          beforeAlt="Oak kitchen with a peninsula and two stools. Before side of a design concept."
+          afterAlt="The same kitchen with white cabinets, a pale backsplash, and wood-look flooring. Design concept, not a finished project."
+        />
       </div>
     </section>
 
     <section class="why">
-      <div class="wrap split">
-        <div>
+      <div class="wrap">
+        <div class="section-head">
           <p class="eyebrow">Why call</p>
           <h2>Why homeowners call Andre</h2>
-          <p>Nothing here is a rating, a year count, or a license claim. These are the parts of the practice that the work itself is built on.</p>
+          <p>No year count, no review score, and no license number. These are the parts of the practice the work is built on.</p>
         </div>
         <div class="why-grid">
           {
@@ -109,13 +199,55 @@ const homeLd = businessJsonLd();
       </div>
     </section>
 
+    <section id={interior ? "exterior" : "kitchens"}>
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">{interior ? "Also the grounds" : "Also the kitchen"}</p>
+          <h2>{laterTitle}</h2>
+          <p>{laterCopy}</p>
+          <p>
+            <a href={interior ? "/services/#exterior" : "/services/#kitchens"}>
+              {interior ? "All exterior services" : "All kitchen services"}
+            </a>
+          </p>
+        </div>
+        <div>
+          {
+            interior && (
+              <ConceptSlot
+                id="house-exterior"
+                label="Design concept"
+                alt="Design concept of a Springfield-style house exterior. Not a finished project and not Andre’s address."
+              />
+            )
+          }
+          <ul class="project-list">
+            {
+              later.map((service) => (
+                <li>
+                  <a href={`/services/${service.slug}/`}>{service.name}</a>
+                </li>
+              ))
+            }
+            <li>
+              <a href="/services/interior-exterior/">Interior and exterior, planned together</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section>
       <div class="wrap split">
         <div>
           <p class="eyebrow">Approach</p>
-          <h2>Listen, then design, then build.</h2>
-          <p>The short version: walk the property, draw walls, paths, planting, fire, and circulation as one composition, then install that plan. The full sequence, including the first call and the final walkthrough, is on the process page.</p>
-          <p><a href="/process/">See how a project proceeds</a></p>
+          <h2>Walk the place, then build the scope you agreed to.</h2>
+          <p>
+            A kitchen, a yard, or both. The short version is the same: look at how you use it, write a scope you can accept or decline, then build that scope. The full sequence is on the process page.
+          </p>
+          <p>
+            <a href="/process/">See how a project proceeds</a>
+          </p>
         </div>
         <ol class="steps">
           {
@@ -135,19 +267,23 @@ const homeLd = businessJsonLd();
         <div>
           <p class="eyebrow">Service area</p>
           <h2>{site.area}</h2>
-          <p>The practice is based in Springfield. If the property is in a nearby Central Illinois town, name it when you call or on the form. Andre will say whether the trip makes sense. No radius is promised here, and the street address is not published.</p>
+          <p>
+            The practice is based in Springfield. Name the town when you call or on the form. Andre will say whether the trip makes sense. No radius is promised here, and the street address is not published.
+          </p>
         </div>
         <div class="panel">
-          <h3>Start with the property</h3>
-          <p>The useful facts are the town, what you want changed, and how to reach you. A budget range is optional and is not a quote.</p>
-          <p><a href="/contact/">Request a consultation</a></p>
+          <h3>Start with the room or the yard</h3>
+          <p>Say whether it is the kitchen, the grounds, or both, and how to reach you. A budget range is optional and is not a quote.</p>
+          <p>
+            <a href="/contact/">Request a consultation</a>
+          </p>
         </div>
       </div>
     </section>
 
     <CtaBand
-      heading="Tell Andre about the yard."
-      text="Call if you want to talk now. The form goes to the same person: the wall, the planting, the patio, the fire, or a stone detail you have been picturing."
+      heading={interior ? "Tell Andre about the kitchen." : "Tell Andre about the yard."}
+      text="Call if you want to talk now. The form reaches the same person, whether the job is a backsplash, a full remodel, or the landscape outside."
     />
   </main>
 </Base>
