@@ -167,3 +167,5 @@ Up to 3 photos, JPEG, PNG, or WebP, 2 MB each, 6 MB together. They are attached 
 - `source-images/demo/` — original files from the previous demo, including ones that are not published
 - `public/images/` — generated responsive images
 - `scripts/images.mjs` — crops, AVIF, WebP, Open Graph image, favicons
+
+<!-- redesign branch: pipeline check -->
