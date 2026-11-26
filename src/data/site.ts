@@ -72,7 +72,7 @@ export interface Service {
   projects: string[];
   image: string | null;
   concept?: string;
-  group: "kitchen" | "exterior" | "property";
+  group: "interior" | "exterior" | "property";
   related: string[];
 }
 
@@ -264,8 +264,61 @@ export const services: Service[] = [
     related: ["full-kitchen-remodels", "landscape-design-installation"],
   },
   {
+    slug: "interior-stonework-tile",
+    group: "interior",
+    name: "Interior stonework & tile",
+    title: "Interior Stonework & Tile in Springfield, IL | Andre Preer",
+    description:
+      "Interior stonework and tile for Springfield and Central Illinois homes: backsplashes and detailed stone and tile surfaces designed with the room.",
+    summary: "Stone and tile worked into the room as design, from backsplashes to detailed feature surfaces.",
+    h1: "Interior stonework and tile",
+    problem:
+      "Stone and tile added as an afterthought read as a finish applied to a room. The surface, the light, and the cabinetry never quite agree.",
+    solution:
+      "Interior stonework and tile are treated as design, not decoration: the material, the pattern, the edges, and how the surface meets the cabinets, counters, and fixtures are decided with the room. This is Andre’s focus in the winter season, and it runs through his kitchen and bathroom work.",
+    benefits: [
+      "The stone or tile is chosen and laid out with the room, so edges and transitions land on purpose.",
+      "Fine detail work is part of the practice, indoors as well as out.",
+      "The same hands that plan the surface install it.",
+    ],
+    projects: [
+      "A tile or stone backsplash designed with the counter and the cabinets",
+      "A detailed stone or tile surface that becomes the feature of a room",
+      "Stone and tile detail inside a kitchen or bathroom remodel",
+    ],
+    image: null,
+    concept: "herringbone",
+    related: ["backsplash-installation", "bathroom-remodeling", "specialty-stone-water"],
+  },
+  {
+    slug: "bathroom-remodeling",
+    group: "interior",
+    name: "Bathroom remodeling",
+    title: "Bathroom Remodeling in Springfield, IL | Andre Preer",
+    description:
+      "Bathroom remodeling in Springfield and Central Illinois, with tile and stone detail planned as part of the room.",
+    summary: "Bathrooms planned as one room, with tile and stone detail worked in from the start.",
+    h1: "Bathroom remodeling",
+    problem:
+      "A bathroom updated one fixture at a time ends up with tile that fights the vanity and a layout that still does not work for the people using it.",
+    solution:
+      "Andre plans the bathroom as a single scope: layout, surfaces, tile, and stone detail, then carries it through the build.",
+    benefits: [
+      "Surfaces, tile, and fixtures are decided together, so they meet on purpose.",
+      "Tile and stone detail is part of the plan, not a finish added at the end.",
+      "You work with the person who plans the room and builds it.",
+    ],
+    projects: [
+      "A full bathroom remodel planned as one scope",
+      "A tile or stone surface that anchors the room",
+      "A bathroom planned alongside a kitchen or other interior work",
+    ],
+    image: null,
+    related: ["interior-stonework-tile", "full-kitchen-remodels", "specialty-stone-water"],
+  },
+  {
     slug: "full-kitchen-remodels",
-    group: "kitchen",
+    group: "interior",
     name: "Full kitchen remodels",
     title: "Full Kitchen Remodels in Springfield, IL | Andre Preer",
     description:
@@ -292,7 +345,7 @@ export const services: Service[] = [
   },
   {
     slug: "backsplash-installation",
-    group: "kitchen",
+    group: "interior",
     name: "Backsplash installation",
     title: "Kitchen Backsplash Installation in Springfield, IL | Andre Preer",
     description:
@@ -319,7 +372,7 @@ export const services: Service[] = [
   },
   {
     slug: "cabinets",
-    group: "kitchen",
+    group: "interior",
     name: "Cabinets, new and refacing",
     title: "Kitchen Cabinets & Refacing in Springfield, IL | Andre Preer",
     description:
@@ -346,7 +399,7 @@ export const services: Service[] = [
   },
   {
     slug: "countertops",
-    group: "kitchen",
+    group: "interior",
     name: "Countertops",
     title: "Kitchen Countertops in Springfield, IL | Andre Preer",
     description:
@@ -373,7 +426,7 @@ export const services: Service[] = [
   },
   {
     slug: "kitchen-islands-layout",
-    group: "kitchen",
+    group: "interior",
     name: "Islands and layout changes",
     title: "Kitchen Islands & Layout Changes in Springfield, IL | Andre Preer",
     description:
@@ -400,7 +453,7 @@ export const services: Service[] = [
   },
   {
     slug: "lighting-finishing",
-    group: "kitchen",
+    group: "interior",
     name: "Lighting and finishing",
     title: "Kitchen Lighting & Finishing in Springfield, IL | Andre Preer",
     description:
@@ -441,12 +494,12 @@ export const reasons = [
     text: "The plan is not drawn by one company and installed by another. Andre carries the yard from the walk-through through the build.",
   },
   {
-    title: "Hardscape and planting are one plan",
-    text: "Walls, patios, walks, and beds are decided together, so stone is not added after the planting is fixed, and planting is not squeezed in around the stone.",
+    title: "Stone and tile are treated as design",
+    text: "Backsplashes, bathrooms, walls, and patios share one idea: natural materials, set true, with edges and transitions decided before the work begins.",
   },
   {
-    title: "Natural materials, used with restraint",
-    text: "Limestone and other natural stone, set true and kept in proportion to the house, rather than a catalog of features piled into one yard.",
+    title: "Inside and out, one practice",
+    text: "Kitchens and bathrooms in the winter, landscape and stone outdoors the rest of the year. The same person plans and builds both.",
   },
   {
     title: "Sized to Central Illinois houses",
@@ -463,7 +516,7 @@ export const processSteps = [
   {
     n: "02",
     title: "Site visit and consultation",
-    text: "Andre walks the property with you. The visit is for how you use the grounds, and for what is already worth keeping.",
+    text: "Andre walks the kitchen, the bathroom, the yard, or all of it with you. The visit is for how you use the space and for what is already worth keeping.",
   },
   {
     n: "03",
@@ -495,7 +548,7 @@ export function businessJsonLd() {
         email: site.email,
         image: `${site.url}/og.jpg`,
         description:
-          "Landscape design and installation, hardscaping, patios, limestone walls, and custom stonework for Springfield and Central Illinois homes. Andre M. Preer II.",
+          "Interior design with stonework and tile, kitchen and bathroom remodeling, plus landscape design, hardscaping, and custom stonework for Springfield and Central Illinois homes. Andre M. Preer II.",
         address: {
           "@type": "PostalAddress",
           addressLocality: site.locality,
@@ -507,6 +560,11 @@ export function businessJsonLd() {
           { "@type": "AdministrativeArea", name: "Central Illinois" },
         ],
         knowsAbout: [
+          "Interior design",
+          "Kitchen remodeling",
+          "Bathroom remodeling",
+          "Tile backsplash installation",
+          "Interior stonework and tile",
           "Landscape design",
           "Limestone walls",
           "Hardscaping",
@@ -532,8 +590,8 @@ export function businessJsonLd() {
         ],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: "Landscape, hardscape, and stonework",
-          itemListElement: services.filter((service) => service.group === "exterior").map((service) => ({
+          name: "Interiors, landscape, hardscape, and stonework",
+          itemListElement: services.map((service) => ({
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",

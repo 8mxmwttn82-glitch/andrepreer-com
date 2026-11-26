@@ -1,18 +1,25 @@
 ---
 import { Picture } from "astro:assets";
 import Base from "../layouts/Base.astro";
+import BeforeAfter from "../components/BeforeAfter.astro";
 import ConceptSlot from "../components/ConceptSlot.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { conceptImages } from "../data/concepts";
 import { businessJsonLd, processSteps, reasons, servicesIn, site } from "../data/site";
+import { seasonEmphasis } from "../data/season";
 
-const exterior = servicesIn("exterior");
-const hero = conceptImages["outdoor-fire"];
+const interior = seasonEmphasis === "interior";
+const lead = servicesIn(interior ? "interior" : "exterior");
+const other = servicesIn(interior ? "exterior" : "interior");
+const hero = conceptImages[interior ? "hero-kitchen" : "outdoor-fire"];
+const heroAlt = interior
+  ? "A bright white kitchen with a farmhouse sink, a pale tile backsplash, and a wood island. Design concept image, not a finished Andre Preer project."
+  : "A square stone fire pit with wooden chairs on a flagstone patio, with a curved stone seat wall and mature trees behind. Design concept image, not a finished Andre Preer project.";
 ---
 
 <Base
-  title="Landscaping & Stonework in Springfield, IL | Andre Preer"
-  description="Landscape design, hardscaping, patios, retaining walls, and custom stonework for Springfield and Central Illinois homes. Request an estimate from Andre Preer."
+  title="Interior Stonework, Kitchens & Landscaping in Springfield, IL | Andre Preer"
+  description="Interior design with stonework and tile, kitchen and bathroom remodeling, plus landscaping and hardscaping for Springfield and Central Illinois homes. Request an estimate."
   jsonLd={businessJsonLd()}
 >
   <main id="main">
@@ -21,9 +28,9 @@ const hero = conceptImages["outdoor-fire"];
         <Picture
           src={hero}
           formats={["avif", "webp"]}
-          widths={[480, 768, 1152]}
+          widths={[480, 768, 1152, 1600]}
           sizes="100vw"
-          alt="A square stone fire pit with wooden chairs on a flagstone patio, with a curved stone seat wall and mature trees behind. Design concept image, not a finished Andre Preer project."
+          alt={heroAlt}
           loading="eager"
           decoding="async"
           fetchpriority="high"
@@ -31,11 +38,17 @@ const hero = conceptImages["outdoor-fire"];
       </div>
       <div class="wrap">
         <div class="hero-copy rise">
-          <p class="eyebrow">Landscape · Hardscape · Stonework</p>
+          <p class="eyebrow">
+            {interior ? "Interiors · Stonework · Tile" : "Landscape · Hardscape · Stonework"}
+          </p>
           <h1>Thoughtfully designed. Beautifully built.</h1>
           <span class="rule" aria-hidden="true"></span>
           <p class="lede">
-            Exceptional landscaping, hardscaping, and custom stonework for homes throughout Springfield and Central Illinois.
+            {
+              interior
+                ? "Interior design, kitchens, bathrooms, tile, and custom stonework, with landscaping and hardscaping outside, for homes throughout Springfield and Central Illinois."
+                : "Landscaping, hardscaping, and custom stonework, with kitchens, bathrooms, and interior tile and stone inside, for homes throughout Springfield and Central Illinois."
+            }
           </p>
           <div class="actions">
             <a class="btn btn-light" href="/contact/">Request an estimate</a>
@@ -49,12 +62,12 @@ const hero = conceptImages["outdoor-fire"];
     <section>
       <div class="wrap split">
         <div>
-          <p class="eyebrow">The approach</p>
-          <h2>Stone, planting, and outdoor rooms, planned together.</h2>
+          <p class="eyebrow">The practice</p>
+          <h2>Stone and tile, treated as design. Inside and out.</h2>
         </div>
         <div>
           <p class="lede">
-            {site.person} designs and builds residential landscapes in {site.area}. Walls, patios, walks, fire areas, and planting are drawn as one yard, so each piece is placed for a reason.
+            {site.person} designs and builds in {site.area}. In winter the focus is the interior: kitchens, bathrooms, and the stonework and tile that make a room. The rest of the year it moves outside to landscape, walls, patios, and fire features.
           </p>
           <p>
             <a href="/about/">About Andre</a>
@@ -66,12 +79,12 @@ const hero = conceptImages["outdoor-fire"];
     <section class="tight">
       <div class="wrap">
         <div class="section-head">
-          <p class="eyebrow">Services</p>
-          <h2>What Andre builds</h2>
+          <p class="eyebrow">{interior ? "Interiors" : "Exterior"}</p>
+          <h2>{interior ? "Kitchens, bathrooms, stone and tile" : "Landscape, stone, and outdoor rooms"}</h2>
         </div>
         <ol class="service-index">
           {
-            exterior.map((service, index) => (
+            lead.map((service, index) => (
               <li>
                 <a href={`/services/${service.slug}/`}>
                   <span class="num">{String(index + 1).padStart(2, "0")}</span>
@@ -91,24 +104,36 @@ const hero = conceptImages["outdoor-fire"];
     <section class="stone-band">
       <div class="wrap">
         <div class="section-head">
-          <p class="eyebrow">The look</p>
-          <h2>Natural materials, kept in proportion.</h2>
+          <p class="eyebrow">{interior ? "Featured" : "The look"}</p>
+          <h2>{interior ? "The backsplash, and the kitchen around it" : "Natural materials, kept in proportion"}</h2>
           <p>
-            Reference imagery for the kind of yard Andre designs. These are design concepts, not photographs of finished jobs. Real project photography will replace them as it is added.
+            These images are design concepts, not photographs of finished jobs. Real project photography replaces them as it is added.
           </p>
         </div>
-        <div class="ref-grid">
-          <ConceptSlot
-            id="stone-patio"
-            label="Design concept"
-            alt="A curving flagstone walk and patio beside a brick house, with hostas and a lawn. Design concept, not a finished project."
-          />
-          <ConceptSlot
-            id="landscaped-bed"
-            label="Design concept"
-            alt="A brick house front with layered shrubs, hydrangeas, and perennials in a mulched bed. Design concept, not a finished project."
-          />
-        </div>
+        {
+          interior ? (
+            <BeforeAfter
+              beforeId="backsplash-before"
+              afterId="backsplash-after"
+              caption="Backsplash style idea"
+              beforeAlt="Oak cabinets and a short tile backsplash at a sink window. Before side of a design concept."
+              afterAlt="The same sink wall with a taller pale tile backsplash and a light stone counter. Design concept, not a finished project."
+            />
+          ) : (
+            <div class="ref-grid">
+              <ConceptSlot
+                id="stone-patio"
+                label="Design concept"
+                alt="A curving flagstone walk and patio beside a brick house, with hostas and a lawn. Design concept, not a finished project."
+              />
+              <ConceptSlot
+                id="landscaped-bed"
+                label="Design concept"
+                alt="A brick house front with layered shrubs, hydrangeas, and perennials in a mulched bed. Design concept, not a finished project."
+              />
+            </div>
+          )
+        }
         <p><a class="btn btn-line" href="/portfolio/">See the work page</a></p>
       </div>
     </section>
@@ -132,13 +157,46 @@ const hero = conceptImages["outdoor-fire"];
       </div>
     </section>
 
+    <section id={interior ? "exterior" : "interior"}>
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">{interior ? "Also outside" : "Also inside"}</p>
+          <h2>{interior ? "The yard, the stone, and the outdoor rooms" : "Kitchens, bathrooms, stone and tile"}</h2>
+          <p>
+            {
+              interior
+                ? "Landscape, limestone, patios, planting, and fire features are the same practice moved outdoors, and they are what Andre builds the rest of the year."
+                : "Andre’s winter focus is the interior. Kitchens, bathrooms, and stonework and tile stay on the site all year."
+            }
+          </p>
+          <p>
+            <a href={interior ? "/services/#exterior" : "/services/#interior"}>
+              {interior ? "All exterior services" : "All interior services"}
+            </a>
+          </p>
+        </div>
+        <ul class="project-list">
+          {
+            other.map((service) => (
+              <li>
+                <a href={`/services/${service.slug}/`}>{service.name}</a>
+              </li>
+            ))
+          }
+          <li>
+            <a href="/services/interior-exterior/">Interior and exterior, planned together</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <section>
       <div class="wrap split">
         <div>
           <p class="eyebrow">Process</p>
           <h2>Walk the place, then build the scope you agreed to.</h2>
           <p>
-            Look at how you use the yard, write a scope you can accept or decline, then build that scope. The full sequence is on the process page.
+            Look at how you use the room or the yard, write a scope you can accept or decline, then build that scope. The full sequence is on the process page.
           </p>
           <p>
             <a href="/process/">See how a project proceeds</a>
@@ -168,7 +226,7 @@ const hero = conceptImages["outdoor-fire"];
         </div>
         <div class="panel">
           <h3>Start with a conversation</h3>
-          <p>Tell Andre what the yard needs and how to reach you. A budget range is optional.</p>
+          <p>Say whether it is a kitchen, a bathroom, the yard, or more than one, and how to reach you. A budget range is optional.</p>
           <p>
             <a href="/contact/">Request an estimate</a>
           </p>
@@ -176,17 +234,9 @@ const hero = conceptImages["outdoor-fire"];
       </div>
     </section>
 
-    <section class="tight">
-      <div class="wrap">
-        <p class="fine-line">
-          Andre also takes on interior work, including kitchen backsplash and remodeling. <a href="/services/#kitchens">See interior services</a>.
-        </p>
-      </div>
-    </section>
-
     <CtaBand
-      heading="Tell Andre about the yard."
-      text="Call if you want to talk now. The form reaches the same person, whether the job is a patio, a wall, or the whole landscape."
+      heading="Tell Andre about the project."
+      text="Call if you want to talk now. The form reaches the same person, whether the job is a backsplash, a bathroom, a wall, or the whole yard."
     />
   </main>
 </Base>
