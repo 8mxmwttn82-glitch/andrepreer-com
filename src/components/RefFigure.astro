@@ -1,0 +1,18 @@
+---
+import Picture from "./Picture.astro";
+import type { Photo } from "../data/site";
+
+interface Props {
+  photo: Photo;
+  sizes?: string;
+  priority?: boolean;
+}
+const { photo, sizes = "(min-width: 900px) 40rem, 100vw", priority = false } = Astro.props;
+---
+
+<figure>
+  <div class="frame">
+    <Picture photo={photo} sizes={sizes} priority={priority} />
+  </div>
+  <figcaption><span class="tag">Reference photo</span> {photo.caption}</figcaption>
+</figure>

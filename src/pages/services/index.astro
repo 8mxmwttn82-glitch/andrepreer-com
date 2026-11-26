@@ -1,0 +1,43 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import RefFigure from "../../components/RefFigure.astro";
+import { photos, services } from "../../data/site";
+---
+
+<Base
+  title="Landscape, Stone & Outdoor Living Services | Andre Preer"
+  description="Services from Andre Preer in Springfield, Illinois: landscape design, planting, limestone walls, patios, fire features, specialty stone, and interior-exterior work."
+>
+  <main id="main">
+    <section>
+      <div class="wrap">
+        <Breadcrumbs crumbs={[{ name: "Home", href: "/" }, { name: "Services", href: "/services/" }]} />
+        <p class="eyebrow">Services</p>
+        <h1>The work, in the pieces a property actually needs</h1>
+        <p class="lede">
+          Most calls are about more than one of these. They are separated here so you can see what each one is for. A project can be a single bed or a whole property.
+        </p>
+      </div>
+    </section>
+    <section class="tight">
+      <div class="wrap">
+        {
+          services.map((service) => (
+            <article class="split stack">
+              <div>
+                <h2><a href={`/services/${service.slug}/`}>{service.name}</a></h2>
+                <p>{service.summary}</p>
+                <p>{service.problem}</p>
+                <p><a href={`/services/${service.slug}/`}>About {service.name.toLowerCase()}</a></p>
+              </div>
+              {service.image ? <RefFigure photo={photos[service.image]} sizes="(min-width: 900px) 28rem, 100vw" /> : <div class="plain-panel"><p>Photographs of this work are not published yet. The description is the specific part; ask to see examples when you talk with Andre.</p></div>}
+            </article>
+          ))
+        }
+      </div>
+    </section>
+    <CtaBand heading="Not sure which of these you need?" text="Describe the property. Andre will tell you what belongs in the scope and what does not." />
+  </main>
+</Base>

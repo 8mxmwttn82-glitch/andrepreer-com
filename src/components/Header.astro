@@ -1,0 +1,31 @@
+---
+import { nav, site } from "../data/site";
+
+const path = Astro.url.pathname;
+function current(href: string) {
+  if (href === "/") return path === "/";
+  return path === href || path.startsWith(href);
+}
+---
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="header-bar">
+    <a class="brand" href="/">
+      <span class="brand-name">Andre Preer</span>
+      <span class="brand-meta">Springfield, Illinois</span>
+    </a>
+    <a class="header-call" href={`tel:${site.phoneTel}`}>Call Andre</a>
+    <input class="nav-check" id="nav-toggle" type="checkbox" />
+    <label class="nav-toggle" for="nav-toggle"><span class="closed">Menu</span><span class="open">Close</span></label>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      {
+        nav.map((item) => (
+          <a href={item.href} aria-current={current(item.href) ? "page" : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

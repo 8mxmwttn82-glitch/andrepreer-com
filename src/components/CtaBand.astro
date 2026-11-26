@@ -1,0 +1,22 @@
+---
+import { site } from "../data/site";
+
+interface Props {
+  heading: string;
+  text: string;
+}
+const { heading, text } = Astro.props;
+---
+
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Talk with Andre</p>
+    <h2>{heading}</h2>
+    <p class="lede">{text}</p>
+    <p><a class="phone-xl" href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a></p>
+    <div class="actions">
+      <a class="btn btn-light" href={`tel:${site.phoneTel}`}>Call Andre</a>
+      <a class="btn btn-ghost" href="/contact/">Request a consultation</a>
+    </div>
+  </div>
+</section>

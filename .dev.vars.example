@@ -1,0 +1,7 @@
+# Local only. Wrangler reads this file for `wrangler dev` and does not upload it.
+# Never set ALLOW_MOCK_EMAIL or MAIL_PROVIDER=mock in production.
+
+MAIL_PROVIDER=mock
+ALLOW_MOCK_EMAIL=true
+CONTACT_TO=belicimo8@gmail.com
+CONTACT_FROM=Andre Preer website <consultations@andrepreer.com>

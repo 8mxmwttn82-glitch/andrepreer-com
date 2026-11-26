@@ -1,0 +1,49 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CtaBand from "../components/CtaBand.astro";
+import RefFigure from "../components/RefFigure.astro";
+import { photos, site } from "../data/site";
+---
+
+<Base
+  title="About Andre Preer | Springfield Landscape & Stonework"
+  description="Andre M. Preer II designs and builds residential landscapes and stonework in Springfield and Central Illinois. How he reads a property, without a brochure biography."
+>
+  <main id="main">
+    <section>
+      <div class="wrap">
+        <Breadcrumbs crumbs={[{ name: "Home", href: "/" }, { name: "About", href: "/about/" }]} />
+        <p class="eyebrow">The person you are calling</p>
+        <h1>{site.person}</h1>
+        <p class="lede">
+          Andre Preer designs and builds residential landscapes in {site.area}: planting, limestone and other stone, patios and outdoor rooms, fire features, and specialty stone detail when a project needs it.
+        </p>
+      </div>
+    </section>
+    <section class="tight">
+      <div class="wrap split">
+        <RefFigure photo={photos["stone-home-plantings"]} sizes="(min-width: 900px) 36rem, 100vw" />
+        <div class="prose">
+          <h2>How a property gets read</h2>
+          <p>
+            The first useful hour is on the site. Andre walks it with you and pays attention to sun, grade, views, how you move between the door and the yard, and which existing trees, walls, or beds are worth keeping. The plan starts from that, not from a template of outdoor rooms.
+          </p>
+          <h2>Design and build stay in one pair of hands</h2>
+          <p>
+            A lot of landscape work splits in half: someone draws it, someone else who never made the walk installs a version of it. Here the design and the installation stay with Andre, so the scope you agree to is the scope that gets built.
+          </p>
+          <h2>What this page will not pretend</h2>
+          <p>
+            There is no year-in-business claim, no license number, and no award list on this site, because those facts are not established here. If they matter to your decision, ask on the call. The work to judge is the plan for your property, and jobs you can see in person.
+          </p>
+          <p><a href="/process/">How a project proceeds</a> · <a href="/services/">Services</a></p>
+        </div>
+      </div>
+    </section>
+    <CtaBand
+      heading="Call Andre about your property."
+      text="Springfield and the surrounding Central Illinois towns. Say where the house is and what you want changed."
+    />
+  </main>
+</Base>

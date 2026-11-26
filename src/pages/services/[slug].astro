@@ -1,0 +1,93 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import RefFigure from "../../components/RefFigure.astro";
+import { photos, serviceBySlug, services, site } from "../../data/site";
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+const { service } = Astro.props;
+const photo = service.image ? photos[service.image] : null;
+const related = service.related.map((slug) => serviceBySlug(slug)).filter((item) => item !== undefined);
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: service.name,
+  description: service.description,
+  url: `${site.url}/services/${service.slug}/`,
+  areaServed: { "@type": "City", name: "Springfield", containedInPlace: { "@type": "State", name: "Illinois" } },
+  provider: { "@id": `${site.url}/#business`, name: site.name, telephone: "+1-309-431-1805" },
+};
+---
+
+<Base title={service.title} description={service.description} jsonLd={jsonLd}>
+  <main id="main">
+    <section>
+      <div class="wrap">
+        <Breadcrumbs
+          crumbs={[
+            { name: "Home", href: "/" },
+            { name: "Services", href: "/services/" },
+            { name: service.name, href: `/services/${service.slug}/` },
+          ]}
+        />
+        <p class="eyebrow">Springfield &amp; Central Illinois</p>
+        <h1>{service.h1}</h1>
+        <p class="lede">{service.summary}</p>
+      </div>
+    </section>
+    <section class="tight">
+      <div class="wrap split">
+        {
+          photo ? (
+            <RefFigure photo={photo} sizes="(min-width: 900px) 36rem, 100vw" />
+          ) : (
+            <div class="plain-panel">
+              <p class="eyebrow">Photographs</p>
+              <p>No project photograph of this work is published here yet. The words on this page are the description. Ask Andre to show you the relevant work when you meet.</p>
+            </div>
+          )
+        }
+        <div>
+          <h2>The problem</h2>
+          <p>{service.problem}</p>
+          <h2>How Andre approaches it</h2>
+          <p>{service.solution}</p>
+        </div>
+      </div>
+    </section>
+    <section class="tight">
+      <div class="wrap two">
+        <div class="panel">
+          <h2>What you get</h2>
+          <ul class="project-list">
+            {service.benefits.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="panel">
+          <h2>Typical projects of this kind</h2>
+          <p class="hint">Examples of scope, not a list of past jobs or client sites.</p>
+          <ul class="project-list">
+            {service.projects.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="tight">
+      <div class="wrap">
+        <h2>Related work</h2>
+        <ul class="project-list">
+          {related.map((item) => (
+            <li><a href={`/services/${item.slug}/`}>{item.name}</a> — {item.summary}</li>
+          ))}
+          <li><a href="/portfolio/">Reference gallery</a></li>
+          <li><a href={`/contact/?type=${service.slug}`}>Request a consultation about {service.name.toLowerCase()}</a></li>
+        </ul>
+      </div>
+    </section>
+    <CtaBand heading={`Talk with Andre about ${service.name.toLowerCase()}.`} text="Call the primary line, or send the property details through the form. Either one reaches him directly." />
+  </main>
+</Base>

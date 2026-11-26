@@ -1,0 +1,71 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Picture from "../components/Picture.astro";
+import { photos } from "../data/site";
+import manifest from "../data/images.json";
+
+const largest = (id: string) => {
+  const widths = (manifest as Record<string, { widths: number[] }>)[id].widths;
+  return widths[widths.length - 1];
+};
+
+const gallery = [
+  photos["residential-home-dusk"],
+  photos["stone-home-and-lawn"],
+  photos["stone-home-plantings"],
+  photos["front-entry-planting"],
+  photos["soil-and-hand-tools"],
+  photos["interior-living-room"],
+];
+---
+
+<Base
+  title="Reference Gallery | Andre Preer, Springfield IL"
+  description="Reference photographs for Andre Preer’s Springfield landscape and stonework practice. These are not labeled as finished client projects."
+>
+  <main id="main">
+    <section>
+      <div class="wrap">
+        <Breadcrumbs crumbs={[{ name: "Home", href: "/" }, { name: "Work", href: "/portfolio/" }]} />
+        <p class="eyebrow">Gallery</p>
+        <h1>Reference images, clearly labeled</h1>
+        <p class="lede">
+          There is not a verified set of Andre’s finished projects on this site. The photographs below are references for the kinds of houses, plantings, and materials the work is planned around. They are not client projects, not locations he claims, and not before-and-after pairs. House numbers visible in a photo belong to that reference image. They are not this business’s address.
+        </p>
+        <p>Nothing here is filtered into fake project categories. When there are real job photographs Andre wants published, they can replace these.</p>
+      </div>
+    </section>
+    <section class="tight">
+      <div class="wrap gallery" id="gallery">
+        {
+          gallery.map((photo) => (
+            <figure>
+              <a class="shot" href={`/images/${photo.id}-${largest(photo.id)}.webp`} data-full={`/images/${photo.id}-${largest(photo.id)}.webp`} data-caption={photo.caption}>
+                <span class="frame">
+                  <Picture photo={photo} sizes="(min-width: 720px) 36rem, 100vw" />
+                </span>
+              </a>
+              <figcaption>
+                <span class="tag">Reference photo</span>
+                {photo.caption}
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </section>
+    <CtaBand heading="Ask to see the work in person." text="A reference photo is not a substitute for standing on a finished job. Call or request a consultation." />
+  </main>
+  <dialog class="lightbox" id="lightbox">
+    <div class="lightbox-bar">
+      <button type="button" data-prev>Previous</button>
+      <button type="button" data-close>Close</button>
+      <button type="button" data-next>Next</button>
+    </div>
+    <img id="lightbox-img" alt="Enlarged reference photograph" width="1600" height="1066" />
+    <p id="lightbox-caption"></p>
+  </dialog>
+  <script is:inline src="/lightbox.js" defer></script>
+</Base>

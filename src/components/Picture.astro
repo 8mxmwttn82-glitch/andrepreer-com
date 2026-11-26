@@ -1,0 +1,40 @@
+---
+import type { Photo } from "../data/site";
+import manifest from "../data/images.json";
+
+interface Entry {
+  width: number;
+  height: number;
+  widths: number[];
+}
+
+interface Props {
+  photo: Photo;
+  sizes: string;
+  priority?: boolean;
+  class?: string;
+}
+
+const { photo, sizes, priority = false, class: className } = Astro.props;
+const meta = (manifest as Record<string, Entry>)[photo.id];
+if (!meta) throw new Error(`Missing image ${photo.id}`);
+const srcset = (ext: string) => meta.widths.map((width) => `/images/${photo.id}-${width}.${ext} ${width}w`).join(", ");
+const largest = meta.widths[meta.widths.length - 1];
+---
+
+<picture>
+  <source type="image/avif" srcset={srcset("avif")} sizes={sizes} />
+  <source type="image/webp" srcset={srcset("webp")} sizes={sizes} />
+  <img
+    class={className}
+    src={`/images/${photo.id}-${largest}.webp`}
+    srcset={srcset("webp")}
+    sizes={sizes}
+    alt={photo.alt}
+    width={meta.width}
+    height={meta.height}
+    loading={priority ? "eager" : "lazy"}
+    decoding="async"
+    fetchpriority={priority ? "high" : "auto"}
+  />
+</picture>

@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "andrepreer",
+  "compatibility_date": "2026-11-26",
+  "main": "src/worker.ts",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
+  }
+  // Cloudflare Email is optional. Uncomment the binding to deliver the
+  // consultation form with send_email instead of Resend. Set MAIL_PROVIDER
+  // to "cloudflare", or leave it unset ("auto" prefers Resend when
+  // RESEND_API_KEY is present, then this binding). The sender domain has to
+  // be onboarded to Email Sending. destination_address should match CONTACT_TO.
+  // "send_email": [
+  //   { "name": "EMAIL", "destination_address": "belicimo8@gmail.com" }
+  // ]
+}

@@ -1,0 +1,42 @@
+---
+import { nav, site } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="brand-name">Andre Preer</p>
+      <p class="fine">Landscape, limestone, planting, and outdoor living for {site.area}.</p>
+      <p class="fine">{site.person}</p>
+    </div>
+    <div>
+      <p><a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a></p>
+      <p class="fine">Alternate <a href={`tel:${site.altPhoneTel}`}>{site.altPhoneDisplay}</a></p>
+      <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p class="fine">{site.area}. The street address is not published.</p>
+    </div>
+    <nav aria-label="Footer">
+      {
+        nav.map((item) => (
+          <p>
+            <a href={item.href}>{item.label}</a>
+          </p>
+        ))
+      }
+    </nav>
+  </div>
+  <div class="wrap">
+    <p class="fine">© {year} Andre Preer. AndrePreer.com</p>
+  </div>
+</footer>
+<div class="mobile-bar">
+  <a href={`tel:${site.phoneTel}`}>
+    <span class="bar-kicker">Call Andre</span>
+    <span class="bar-main">{site.phoneDisplay}</span>
+  </a>
+  <a href="/contact/">
+    <span class="bar-kicker">Request</span>
+    <span class="bar-main">A consultation</span>
+  </a>
+</div>

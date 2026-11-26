@@ -1,0 +1,153 @@
+---
+import Base from "../layouts/Base.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Picture from "../components/Picture.astro";
+import { businessJsonLd, photos, processSteps, reasons, services, site } from "../data/site";
+import manifest from "../data/images.json";
+
+const hero = photos["residential-home-dusk"];
+const meta = (manifest as Record<string, { widths: number[] }>)[hero.id];
+const preload = {
+  href: `/images/${hero.id}-${meta.widths[meta.widths.length - 1]}.avif`,
+  srcset: meta.widths.map((width) => `/images/${hero.id}-${width}.avif ${width}w`).join(", "),
+  sizes: "100vw",
+};
+const homeLd = businessJsonLd();
+---
+
+<Base
+  title="Andre Preer | Landscape, Stone & Outdoor Living in Springfield, IL"
+  description="Andre M. Preer II designs and builds residential landscapes in Springfield and Central Illinois: planting, limestone, patios, fire features, and specialty stone."
+  jsonLd={homeLd}
+  preload={preload}
+>
+  <main id="main">
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-media">
+        <Picture photo={hero} sizes="100vw" priority={true} />
+      </div>
+      <div class="wrap hero-copy">
+        <p class="eyebrow">Springfield &amp; Central Illinois</p>
+        <h1>A whole yard, not one trade at a time.</h1>
+        <p class="lede">
+          {site.person} designs and builds residential landscapes — planting, limestone walls, patios, fire features, and specialty stone — as one plan for the way you actually live outside.
+        </p>
+        <div class="actions">
+          <a class="btn btn-light" href={`tel:${site.phoneTel}`}>Call Andre · {site.phoneDisplay}</a>
+          <a class="btn btn-ghost" href="/contact/">Request a consultation</a>
+        </div>
+        <p class="photo-note">Reference photograph of a house at dusk. Not a finished project, and not Andre’s address.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">What he builds</p>
+          <h2>What Andre can do for a property</h2>
+          <p class="muted">Landscaping, stone, planting, fire, and the rooms between the house and the yard. Each is its own page if you want the detail.</p>
+        </div>
+        <ol class="service-index">
+          {
+            services.map((service, index) => (
+              <li>
+                <a href={`/services/${service.slug}/`}>
+                  <span class="num">{String(index + 1).padStart(2, "0")}</span>
+                  <span>
+                    <h3>{service.name}</h3>
+                    <p>{service.summary}</p>
+                  </span>
+                  <span class="more">View</span>
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Selected work</p>
+          <h2>Reference pictures, not a job list</h2>
+          <p>
+            Verified photographs of finished Springfield projects are not on this site yet. These are reference images — houses, plantings, and materials — not completed jobs, not client names, and not before-and-after pairs. Ask to see work in person.
+          </p>
+          <p><a href="/portfolio/">Open the reference gallery</a></p>
+        </div>
+        <div class="ref-grid">
+          <figure>
+            <div class="frame"><Picture photo={photos["stone-home-plantings"]} sizes="(min-width: 720px) 50vw, 100vw" /></div>
+            <figcaption><span class="tag">Reference</span> {photos["stone-home-plantings"].caption}</figcaption>
+          </figure>
+          <figure>
+            <div class="frame"><Picture photo={photos["front-entry-planting"]} sizes="(min-width: 720px) 50vw, 100vw" /></div>
+            <figcaption><span class="tag">Reference</span> {photos["front-entry-planting"].caption}</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="why">
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">Why call</p>
+          <h2>Why homeowners call Andre</h2>
+          <p>Nothing here is a rating, a year count, or a license claim. These are the parts of the practice that the work itself is built on.</p>
+        </div>
+        <div class="why-grid">
+          {
+            reasons.map((reason) => (
+              <article>
+                <h3>{reason.title}</h3>
+                <p>{reason.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">Approach</p>
+          <h2>Listen, then design, then build.</h2>
+          <p>The short version: walk the property, draw walls, paths, planting, fire, and circulation as one composition, then install that plan. The full sequence, including the first call and the final walkthrough, is on the process page.</p>
+          <p><a href="/process/">See how a project proceeds</a></p>
+        </div>
+        <ol class="steps">
+          {
+            processSteps.slice(1, 4).map((step) => (
+              <li>
+                <h3>{step.title}</h3>
+                <p class="muted">{step.text}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">Service area</p>
+          <h2>{site.area}</h2>
+          <p>The practice is based in Springfield. If the property is in a nearby Central Illinois town, name it when you call or on the form. Andre will say whether the trip makes sense. No radius is promised here, and the street address is not published.</p>
+        </div>
+        <div class="panel">
+          <h3>Start with the property</h3>
+          <p>The useful facts are the town, what you want changed, and how to reach you. A budget range is optional and is not a quote.</p>
+          <p><a href="/contact/">Request a consultation</a></p>
+        </div>
+      </div>
+    </section>
+
+    <CtaBand
+      heading="Tell Andre about the yard."
+      text="Call if you want to talk now. The form goes to the same person: the wall, the planting, the patio, the fire, or a stone detail you have been picturing."
+    />
+  </main>
+</Base>

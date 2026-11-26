@@ -1,0 +1,59 @@
+{
+  "residential-home-dusk": {
+    "width": 1800,
+    "height": 1200,
+    "widths": [
+      640,
+      960,
+      1280,
+      1600,
+      1800
+    ]
+  },
+  "stone-home-and-lawn": {
+    "width": 1600,
+    "height": 1066,
+    "widths": [
+      640,
+      960,
+      1280,
+      1600
+    ]
+  },
+  "stone-home-plantings": {
+    "width": 912,
+    "height": 458,
+    "widths": [
+      640,
+      912
+    ]
+  },
+  "front-entry-planting": {
+    "width": 810,
+    "height": 780,
+    "widths": [
+      640,
+      810
+    ]
+  },
+  "soil-and-hand-tools": {
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      640,
+      960,
+      1280,
+      1600
+    ]
+  },
+  "interior-living-room": {
+    "width": 1600,
+    "height": 1029,
+    "widths": [
+      640,
+      960,
+      1280,
+      1600
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { processSteps } from "../data/site";
+---
+
+<Base
+  title="How a Project Works | Andre Preer, Springfield IL"
+  description="How a landscape or stone project with Andre Preer proceeds: contact, a site visit, a proposal, the build, and a final walkthrough. No promised start date."
+>
+  <main id="main">
+    <section>
+      <div class="wrap prose">
+        <Breadcrumbs crumbs={[{ name: "Home", href: "/" }, { name: "Process", href: "/process/" }]} />
+        <p class="eyebrow">Process</p>
+        <h1>From the first call to the walkthrough</h1>
+        <p class="lede">
+          The sequence is ordinary on purpose. Timing depends on the property, the season, and the scope you agree to. Nothing on this page is a promise of a start date or a price.
+        </p>
+        <ol class="process-list">
+          {
+            processSteps.map((step) => (
+              <li>
+                <span class="step-n">{step.n}</span>
+                <h2>{step.title}</h2>
+                <p>{step.text}</p>
+              </li>
+            ))
+          }
+        </ol>
+        <p>If you want the shorter version of how the design itself is approached — walking the site, then drawing the whole picture — that is also described on the <a href="/about/">about page</a>.</p>
+      </div>
+    </section>
+    <CtaBand heading="The first step is a conversation." text="Call, or send the town and a description of the property. You are not committing to a build by asking." />
+  </main>
+</Base>

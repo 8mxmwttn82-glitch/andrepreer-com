@@ -1,0 +1,25 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+---
+
+<Base title="Page not found | Andre Preer" description="That page is not on Andre Preer’s site. Call or go back to the work he does in Springfield." noindex={true}>
+  <main id="main">
+    <section>
+      <div class="wrap prose">
+        <p class="eyebrow">404</p>
+        <h1>That page is not here.</h1>
+        <p>The address may have changed, or the link was wrong. The work is still the landscape, the stone, and the outdoor rooms.</p>
+        <ul class="project-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/portfolio/">Reference gallery</a></li>
+          <li><a href="/process/">Process</a></li>
+          <li><a href="/about/">About Andre</a></li>
+          <li><a href="/contact/">Request a consultation</a></li>
+        </ul>
+        <p><a class="btn btn-solid" href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay}</a></p>
+      </div>
+    </section>
+  </main>
+</Base>

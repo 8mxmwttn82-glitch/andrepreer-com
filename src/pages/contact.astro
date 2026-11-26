@@ -1,0 +1,121 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { budgets, contactMethods, projectTypes } from "../server/options";
+import { site } from "../data/site";
+---
+
+<Base
+  title="Request a Consultation | Andre Preer, Springfield IL"
+  description="Call Andre Preer at 309-431-1805 or request a landscape consultation in Springfield and Central Illinois. Alternate line 702-232-6150."
+>
+  <main id="main">
+    <section>
+      <div class="wrap">
+        <Breadcrumbs crumbs={[{ name: "Home", href: "/" }, { name: "Contact", href: "/contact/" }]} />
+        <p class="eyebrow">Contact</p>
+        <h1>Request a consultation</h1>
+        <p class="lede">The fastest way is a phone call. The form below emails Andre the same details: where the property is, what you want done, and how to reach you.</p>
+      </div>
+    </section>
+    <section class="tight">
+      <div class="wrap form-layout">
+        <div>
+          <p class="eyebrow">Primary</p>
+          <p><a class="phone-xl" href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a></p>
+          <p><a class="btn btn-solid" href={`tel:${site.phoneTel}`}>Call Andre</a></p>
+          <p>Email <a href={`mailto:${site.email}`}>{site.email}</a></p>
+          <p class="muted">Alternate line <a href={`tel:${site.altPhoneTel}`}>{site.altPhoneDisplay}</a></p>
+          <p class="muted">Service area: {site.area}. The street address is not listed. Name your town on the form.</p>
+        </div>
+        <div>
+          <div id="form-config-note" class="alert" hidden></div>
+          <div id="form-success" class="success-box form-status" hidden tabindex="-1">
+            <h2>Andre has your request.</h2>
+            <p id="form-success-copy">He will follow up by the method you chose. If you would rather talk now, call.</p>
+            <p><a class="btn btn-solid" href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay}</a></p>
+          </div>
+          <div id="form-fallback" class="alert form-status" hidden tabindex="-1">
+            <h2>This form did not send.</h2>
+            <p id="form-fallback-copy">Call {site.phoneDisplay} or email {site.email}. Nothing was delivered.</p>
+            <p><a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
+          </div>
+          <form id="consult-form" method="post" action="/api/contact" enctype="multipart/form-data">
+            <div class="hp" aria-hidden="true">
+              <label for="company_website">Company website</label>
+              <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required maxlength="80" />
+              <span class="field-error" id="name-error" hidden></span>
+            </div>
+            <div>
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" required inputmode="tel" />
+              <span class="field-error" id="phone-error" hidden></span>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required maxlength="120" />
+              <span class="field-error" id="email-error" hidden></span>
+            </div>
+            <div>
+              <label for="location">Project location <span class="hint">City or town</span></label>
+              <input id="location" name="location" type="text" autocomplete="address-level2" required maxlength="80" />
+              <span class="field-error" id="location-error" hidden></span>
+            </div>
+            <div>
+              <label for="project_type">Project type</label>
+              <select id="project_type" name="project_type" required>
+                <option value="">Choose a project type</option>
+                {projectTypes.map((item) => <option value={item.value}>{item.label}</option>)}
+              </select>
+              <span class="field-error" id="project_type-error" hidden></span>
+            </div>
+            <div>
+              <label for="description">Describe the project</label>
+              <textarea id="description" name="description" required minlength="20" maxlength="4000"></textarea>
+              <span class="hint" id="description-hint">A sentence or two is enough: the yard, the wall, the planting, the fire, or the stone detail.</span>
+              <span class="field-error" id="description-error" hidden></span>
+            </div>
+            <div>
+              <label for="budget">Budget range <span class="hint">Optional. Not a quote.</span></label>
+              <select id="budget" name="budget">
+                <option value="">Prefer not to say</option>
+                {budgets.map((item) => <option value={item.value}>{item.label}</option>)}
+              </select>
+              <span class="field-error" id="budget-error" hidden></span>
+            </div>
+            <fieldset>
+              <legend>Preferred contact method</legend>
+              <div class="choices">
+                {
+                  contactMethods.map((item, index) => (
+                    <label>
+                      <input type="radio" name="contact_method" value={item.value} required={index === 0} />
+                      {item.label}
+                    </label>
+                  ))
+                }
+              </div>
+              <span class="field-error" id="contact_method-error" hidden></span>
+            </fieldset>
+            <div>
+              <label for="photos">Photos <span class="hint">Optional. Up to 3 JPEG, PNG, or WebP files, 2 MB each.</span></label>
+              <input id="photos" name="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple />
+              <span class="field-error" id="photos-error" hidden></span>
+            </div>
+            <div id="turnstile-slot"></div>
+            <button class="btn btn-solid" type="submit">Send to Andre</button>
+            <p class="hint">Sending means Andre receives this by email. If the form cannot send, you will be told to call or email instead. A success message is only shown after the message is actually accepted.</p>
+          </form>
+          <noscript>
+            <p class="alert">If the form does not confirm anything, call {site.phoneDisplay} or email {site.email}.</p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script is:inline src="/contact-form.js" defer></script>
+</Base>
