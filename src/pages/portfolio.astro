@@ -19,56 +19,75 @@ const gallery = [
   photos["stone-home-plantings"],
   photos["front-entry-planting"],
   photos["soil-and-hand-tools"],
-  photos["interior-living-room"],
+];
+
+// Upload-ready project framework. Each slot is a placeholder until Andre supplies
+// real photographs and confirms the details. Do not add a project name, town, or
+// client unless Andre has confirmed it.
+const slots = [
+  { category: "Patios and outdoor living", note: "Wide shot, detail shot, evening shot if available." },
+  { category: "Walls and stonework", note: "Wall in context, close-up of the stone and joints." },
+  { category: "Walkways and entries", note: "Approach to the door and a detail of the surface." },
+  { category: "Landscape and planting", note: "Established bed, ideally in more than one season." },
+  { category: "Fire features and gathering spaces", note: "Daytime and dusk views with seating." },
+  { category: "Before and after", note: "Same angle, same spot, before work and after." },
 ];
 ---
 
 <Base
-  title="Kitchen Concepts & Exterior References | Andre Preer"
-  description="Design concepts for kitchens and backsplashes, plus reference photos for landscape and stone. None of these are labeled as finished Andre Preer jobs."
+  title="Work: Landscape & Stone Projects | Andre Preer, Springfield IL"
+  description="Landscape, hardscape, and stonework imagery from Andre Preer. Design concepts and reference photos are labeled as such; finished project photography is being added."
 >
   <main id="main">
     <section>
       <div class="wrap">
         <Breadcrumbs crumbs={[{ name: "Home", href: "/" }, { name: "Work", href: "/portfolio/" }]} />
-        <p class="eyebrow">Gallery</p>
-        <h1>Concepts for the kitchen. References for the yard.</h1>
+        <p class="eyebrow">Work</p>
+        <h1>Landscape, stone, and outdoor rooms.</h1>
         <p class="lede">
-          There is not a verified set of Andre’s finished projects on this site. The kitchen frames are design concepts. The yard photographs are references for houses, plantings, and materials. None of them are client jobs, and none of them name a street.
+          Finished project photography is being added. Until then, every image here is labeled as a design concept or a reference photograph, not as a completed Andre Preer job. None of them name a client or a street.
         </p>
       </div>
     </section>
+
     <section class="tight">
       <div class="wrap">
-        <h2>Backsplash style idea</h2>
-        <BeforeAfter
-          beforeId="backsplash-before"
-          afterId="backsplash-after"
-          caption="Backsplash style idea"
-          beforeAlt="Design concept of a kitchen wall before a backsplash. Not a finished project."
-          afterAlt="Design concept of a kitchen backsplash. Not a finished Andre Preer project."
-        />
-      </div>
-    </section>
-    <section class="tight">
-      <div class="wrap">
-        <h2>A full kitchen, as a design concept</h2>
-        <BeforeAfter
-          beforeId="kitchen-before"
-          afterId="kitchen-after"
-          caption="Design concept"
-          beforeAlt="Design concept of a kitchen before remodeling. Not a finished project."
-          afterAlt="Design concept of a remodeled kitchen. Not a finished Andre Preer project."
-        />
-        <div class="ref-grid concept-grid">
-          <ConceptSlot id="cabinets" label="Design concept" alt="Design concept of kitchen cabinets. Not a finished project." />
-          <ConceptSlot id="countertops" label="Design concept" alt="Design concept of a kitchen countertop. Not a finished project." />
-          <ConceptSlot id="island" label="Design concept" alt="Design concept of a kitchen island. Not a finished project." />
-          <ConceptSlot id="herringbone" label="Backsplash style idea" alt="Herringbone tile backsplash in cream and pale green. Design concept, not a finished project." />
+        <div class="section-head">
+          <p class="eyebrow">Design concepts</p>
+          <h2>The kind of yard Andre designs</h2>
+        </div>
+        <div class="ref-grid">
+          <ConceptSlot id="outdoor-fire" label="Design concept" alt="A stone fire pit with chairs on a flagstone patio and a curved seat wall. Design concept, not a finished project." />
+          <ConceptSlot id="stone-patio" label="Design concept" alt="A curving flagstone walk and patio beside a brick house. Design concept, not a finished project." />
+          <ConceptSlot id="landscaped-bed" label="Design concept" alt="Layered planting along a brick house front. Design concept, not a finished project." />
         </div>
       </div>
     </section>
-    <section class="tight">
+
+    <section class="stone-band" id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Project gallery</p>
+          <h2>Finished projects, coming as photographs are added</h2>
+          <p>
+            Each frame below is a placeholder for a real project, grouped by the category it will appear in. Photographs of completed work, with Andre’s confirmation of what was built, replace these.
+          </p>
+        </div>
+        <div class="slot-grid">
+          {
+            slots.map((slot) => (
+              <div class="project-slot">
+                <span class="slot-tag">Placeholder · awaiting project photos</span>
+                <h3>{slot.category}</h3>
+                <p>{slot.note}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section>
       <div class="wrap">
         <h2>Exterior reference photographs</h2>
         <p>These are not before-and-after pairs. House numbers in a photo belong to that reference image. They are not this business’s address.</p>
@@ -91,7 +110,29 @@ const gallery = [
         }
       </div>
     </section>
-    <CtaBand heading="Ask to see the work in person." text="A reference photo is not a substitute for standing on a finished job. Call or request a consultation." />
+
+    <section class="tight">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Interior concepts</p>
+          <h2>Kitchen and backsplash concepts</h2>
+          <p>Interior services are listed on the services page. These frames are design concepts, not finished jobs.</p>
+        </div>
+        <BeforeAfter
+          beforeId="backsplash-before"
+          afterId="backsplash-after"
+          caption="Backsplash style idea"
+          beforeAlt="Design concept of a kitchen wall before a backsplash. Not a finished project."
+          afterAlt="Design concept of a kitchen backsplash. Not a finished Andre Preer project."
+        />
+        <div class="ref-grid concept-grid">
+          <ConceptSlot id="cabinets" label="Design concept" alt="Design concept of kitchen cabinets. Not a finished project." />
+          <ConceptSlot id="countertops" label="Design concept" alt="Design concept of a kitchen countertop. Not a finished project." />
+        </div>
+      </div>
+    </section>
+
+    <CtaBand heading="Ask to see the work in person." text="A photograph is not a substitute for standing on a finished job. Call or request an estimate." />
   </main>
   <dialog class="lightbox" id="lightbox">
     <div class="lightbox-bar">

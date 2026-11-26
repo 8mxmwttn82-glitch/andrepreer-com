@@ -6,7 +6,7 @@ export type SeasonEmphasis = "interior" | "exterior";
  * Change this one value to "exterior" in spring. Nav order and the home
  * hero follow it. Service pages themselves do not change.
  */
-export const seasonEmphasis: SeasonEmphasis = "interior";
+export const seasonEmphasis: SeasonEmphasis = "exterior";
 
 export function seasonalNav(emphasis: SeasonEmphasis = seasonEmphasis) {
   const groups =
@@ -15,10 +15,7 @@ export function seasonalNav(emphasis: SeasonEmphasis = seasonEmphasis) {
           { href: "/services/#kitchens", label: "Kitchens" },
           { href: "/services/#exterior", label: "Exterior" },
         ]
-      : [
-          { href: "/services/#exterior", label: "Exterior" },
-          { href: "/services/#kitchens", label: "Kitchens" },
-        ];
+      : [{ href: "/services/", label: "Services" }];
   return [
     ...groups,
     { href: "/portfolio/", label: "Work" },

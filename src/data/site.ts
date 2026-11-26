@@ -438,15 +438,15 @@ export function servicesIn(group: Service["group"]): Service[] {
 export const reasons = [
   {
     title: "Design and build stay together",
-    text: "The plan is not drawn by one company and installed by another. Andre carries the kitchen, the yard, or both from the walk-through through the build.",
+    text: "The plan is not drawn by one company and installed by another. Andre carries the yard from the walk-through through the build.",
   },
   {
-    title: "The backsplash is part of the kitchen",
-    text: "Tile, cabinets, and the counter are decided together. The backsplash is not a strip added after the other pieces are already fixed.",
+    title: "Hardscape and planting are one plan",
+    text: "Walls, patios, walks, and beds are decided together, so stone is not added after the planting is fixed, and planting is not squeezed in around the stone.",
   },
   {
-    title: "The yard is still part of the practice",
-    text: "Limestone, planting, patios, and fire features stay in the work. A kitchen project does not retire the exterior pages.",
+    title: "Natural materials, used with restraint",
+    text: "Limestone and other natural stone, set true and kept in proportion to the house, rather than a catalog of features piled into one yard.",
   },
   {
     title: "Sized to Central Illinois houses",
@@ -458,12 +458,12 @@ export const processSteps = [
   {
     n: "01",
     title: "Contact",
-    text: "Call or send the consultation form. Say what town the property is in, what you want to change, and how you prefer to be reached. That is enough to start. It is not a quote.",
+    text: "Call or send the estimate request. Say what town the property is in, what you want to change, and how you prefer to be reached. That is enough to start. It is not a quote.",
   },
   {
     n: "02",
     title: "Site visit and consultation",
-    text: "Andre walks the kitchen, the yard, or both with you. The visit is for how you cook and how you use the grounds, and for what is already worth keeping.",
+    text: "Andre walks the property with you. The visit is for how you use the grounds, and for what is already worth keeping.",
   },
   {
     n: "03",
@@ -495,7 +495,7 @@ export function businessJsonLd() {
         email: site.email,
         image: `${site.url}/og.jpg`,
         description:
-          "Kitchen remodeling, backsplash installation, cabinets, countertops, and landscape, stone, and outdoor living for Springfield and Central Illinois. Andre M. Preer II.",
+          "Landscape design and installation, hardscaping, patios, limestone walls, and custom stonework for Springfield and Central Illinois homes. Andre M. Preer II.",
         address: {
           "@type": "PostalAddress",
           addressLocality: site.locality,
@@ -507,10 +507,6 @@ export function businessJsonLd() {
           { "@type": "AdministrativeArea", name: "Central Illinois" },
         ],
         knowsAbout: [
-          "Kitchen remodeling",
-          "Backsplash installation",
-          "Kitchen cabinets",
-          "Countertops",
           "Landscape design",
           "Limestone walls",
           "Hardscaping",
@@ -536,8 +532,8 @@ export function businessJsonLd() {
         ],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: "Kitchens, landscape, and stonework",
-          itemListElement: services.map((service) => ({
+          name: "Landscape, hardscape, and stonework",
+          itemListElement: services.filter((service) => service.group === "exterior").map((service) => ({
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
